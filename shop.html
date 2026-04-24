@@ -12,11 +12,6 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="js/supabase.js"></script>
 
-    <style>
-        /* Shop Specific Tweaks */
-        .results-count { color: #64748b; font-weight: 700; }
-        #price-display { text-align: center; font-weight: 800; margin-top: 15px; color: var(--primary-color); font-size: 1.2rem; }
-    </style>
 </head>
 <body>
 
@@ -85,7 +80,7 @@
     </main>
 
     <!-- WhatsApp Button -->
-    <a href="https://wa.me/212635939690" class="whatsapp-float" target="_blank">
+    <a href="https://wa.me/212635939690" class="whatsapp-float" id="whatsapp-float-btn" target="_blank">
         <i class="fab fa-whatsapp"></i>
     </a>
 
@@ -96,15 +91,15 @@
                 <div class="footer-col" style="text-align: right;">
                     <h4 class="footer-title">تواصل معنا</h4>
                     <div class="contact-item">
-                        <span>تارودانت، المغرب</span>
+                        <span id="footer-location">تارودانت، المغرب</span>
                         <i class="fas fa-map-marker-alt"></i>
                     </div>
                     <div class="contact-item">
-                        <span>+212 635 939 690</span>
+                        <span id="footer-phone">+212 635 939 690</span>
                         <i class="fas fa-phone-alt"></i>
                     </div>
                     <div class="contact-item">
-                        <span>+212 635 939 690</span>
+                        <span id="footer-whatsapp">+212 635 939 690</span>
                         <i class="fab fa-whatsapp"></i>
                     </div>
                 </div>
@@ -128,8 +123,8 @@
                     </div>
                 </div>
             </div>
-            <div style="text-align: center; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 30px;">
-                <p style="color: #64748b;" id="footer-copyright">جميع الحقوق محفوظة &copy; 2026 مفتاح السعادة</p>
+            <div class="footer-bottom">
+                <p id="footer-copyright">جميع الحقوق محفوظة &copy; 2026 مفتاح السعادة</p>
             </div>
         </div>
     </footer>

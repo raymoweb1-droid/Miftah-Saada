@@ -290,7 +290,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (heroTitle && s.hero_title) heroTitle.textContent = s.hero_title;
         if (heroSubtitle && s.hero_subtitle) heroSubtitle.textContent = s.hero_subtitle;
-        if (heroSection && s.hero_image_url) {
+        if (heroSection && s.hero_image_url && s.hero_image_url.trim().length > 10) {
             const cacheBuster = `v=${new Date().getTime()}`;
             const fullUrl = s.hero_image_url.includes('?') 
                 ? `${s.hero_image_url}&${cacheBuster}` 

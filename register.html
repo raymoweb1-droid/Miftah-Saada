@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إنشاء حساب جديد | مفتاح السعادة</title>
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase.js"></script>
+
+    <style>
+        :root {
+            --primary-color: #0B6FFB;
+            --secondary-color: #0f172a;
+            --primary-gradient: linear-gradient(135deg, #0B6FFB, #3b82f6);
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: #f8fafc;
+            background-image: 
+                radial-gradient(circle at 100% 0%, rgba(11, 111, 251, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 0% 100%, rgba(11, 111, 251, 0.08) 0%, transparent 50%);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .auth-wrapper {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            width: 100%;
+        }
+
+        .register-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(20px);
+            border: 1px solid #f1f5f9;
+            padding: 50px;
+            border-radius: 40px;
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            width: 100%;
+            max-width: 520px;
+        }
+
+        .logo-text { font-size: 1.8rem; font-weight: 900; color: #1e293b; margin-bottom: 15px; text-decoration: none; display: flex; justify-content: center; align-items: center; }
+        .logo-text img { max-height: 80px; width: auto; }
+        .logo-text span { color: var(--primary-color); }
+
+        .card-desc { color: #64748b; font-weight: 600; margin-bottom: 35px; }
+
+        .form-group { margin-bottom: 20px; text-align: right; }
+        .form-group label { display: block; margin-bottom: 10px; font-weight: 800; color: #1e293b; font-size: 0.9rem; }
+        
+        .form-control {
+            width: 100%;
+            padding: 16px 20px;
+            border: 2px solid #f1f5f9;
+            border-radius: 15px;
+            background: #f8fafc;
+            font-family: inherit;
+            transition: 0.3s;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-color);
+            background: white;
+            outline: none;
+            box-shadow: 0 0 0 5px rgba(11, 111, 251, 0.08);
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            text-align: right;
+            margin: 25px 0;
+            background: rgba(11, 111, 251, 0.04);
+            padding: 18px;
+            border-radius: 18px;
+            border: 1px solid rgba(11, 111, 251, 0.1);
+            cursor: pointer;
+        }
+
+        .checkbox-group input { width: 22px; height: 22px; cursor: pointer; accent-color: var(--primary-color); }
+        .checkbox-group label { font-size: 0.9rem; color: #475569; font-weight: 600; cursor: pointer; line-height: 1.6; }
+
+        .btn-register {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            padding: 18px;
+            border-radius: 18px;
+            font-size: 1.15rem;
+            font-weight: 900;
+            width: 100%;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            box-shadow: 0 15px 35px var(--primary-color-shadow, rgba(11, 111, 251, 0.25));
+        }
+
+        .btn-register:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 45px var(--primary-color-shadow, rgba(11, 111, 251, 0.35));
+        }
+
+        .error-msg {
+            background: rgba(239, 68, 68, 0.05);
+            color: #ef4444;
+            padding: 15px;
+            border-radius: 15px;
+            margin-top: 20px;
+            display: none;
+            font-weight: 700;
+            border: 1px solid rgba(239, 68, 68, 0.1);
+        }
+
+        .success-msg {
+            background: rgba(16, 185, 129, 0.05);
+            color: #10b981;
+            padding: 15px;
+            border-radius: 15px;
+            margin-top: 20px;
+            display: none;
+            font-weight: 700;
+            border: 1px solid rgba(16, 185, 129, 0.1);
+        }
+
+        .auth-footer { margin-top: 30px; padding-top: 25px; border-top: 1px solid #f1f5f9; }
+        .auth-footer p { color: #64748b; margin-bottom: 10px; font-weight: 600; }
+        .auth-footer a { color: var(--primary-color); text-decoration: none; font-weight: 800; }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 20px;
+            color: #94a3b8;
+            text-decoration: none;
+            font-weight: 700;
+            transition: 0.3s;
+        }
+        .back-link:hover { color: #1e293b; transform: translateX(-5px); }
+    </style>
+</head>
+<body>
+
+    <div class="auth-wrapper">
+        <div class="register-card">
+            <a href="index.html" class="logo-text" id="site-logo-name">
+                Miftah <span>Saada</span>
+            </a>
+            <p class="card-desc" id="register-card-desc">إنشاء حساب جديد للانضمام إلينا</p>
+
+            <form id="registerForm">
+                <div class="form-group">
+                    <label>الاسم الكامل</label>
+                    <input type="text" id="name" class="form-control" placeholder="أدخل اسمك الكامل" required>
+                </div>
+                <div class="form-group">
+                    <label>رقم الهاتف</label>
+                    <input type="tel" id="phone" class="form-control" placeholder="+212 6XXXXXXXX" dir="ltr" style="text-align: right;" required>
+                </div>
+                <div class="form-group">
+                    <label>البريد الإلكتروني</label>
+                    <input type="email" id="email" class="form-control" placeholder="example@mail.com" required>
+                </div>
+                <div class="form-group">
+                    <label>كلمة المرور</label>
+                    <input type="password" id="password" class="form-control" placeholder="••••••••" required>
+                </div>
+
+                <div class="checkbox-group" onclick="document.getElementById('marketing').click()">
+                    <input type="checkbox" id="marketing" checked onclick="event.stopPropagation()">
+                    <label for="marketing">
+                        أوافق على استلام تنبيهات حصرية عبر الواتساب أو الإيميل عند وصول منتجات جديدة وتخفيضات خاصة.
+                    </label>
+                </div>
+
+                <button type="submit" class="btn-register" id="submitBtn">
+                    إنشاء حسابي الآن <i class="fas fa-user-plus"></i>
+                </button>
+                
+                <div id="errorMsg" class="error-msg"></div>
+                <div id="successMsg" class="success-msg">تم تسجيلك بنجاح! جاري تحويلك... <i class="fas fa-spinner fa-spin"></i></div>
+            </form>
+
+            <div class="auth-footer">
+                <p>لديك حساب بالفعل؟ <a href="login.html">تسجيل الدخول</a></p>
+                <a href="index.html" class="back-link">
+                    <i class="fas fa-long-arrow-alt-right"></i> العودة للمتجر
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            const name = document.getElementById('name').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const optIn = document.getElementById('marketing').checked;
+
+            const btn = document.getElementById('submitBtn');
+            const errorDiv = document.getElementById('errorMsg');
+            const successDiv = document.getElementById('successMsg');
+
+            if (!window.supabaseClient) {
+                alert("يرجى ربط Supabase أولاً.");
+                return;
+            }
+
+            btn.disabled = true;
+            btn.innerHTML = 'جاري الإنشاء... <i class="fas fa-spinner fa-spin"></i>';
+            errorDiv.style.display = 'none';
+
+            try {
+                const { data, error } = await window.supabaseClient.auth.signUp({
+                    email: email,
+                    password: password,
+                    options: {
+                        data: {
+                            full_name: name,
+                            phone: phone,
+                            marketing_opt_in: optIn
+                        }
+                    }
+                });
+
+                if (error) throw error;
+                
+                // --- CUSTOMER DATA CAPTURE ---
+                // Corrected column names to match Supabase schema (name, phone, email)
+                await window.supabaseClient.from('customers').insert([{
+                    name: name,
+                    phone: phone,
+                    email: email,
+                    created_at: new Date().toISOString()
+                }]);
+
+                successDiv.style.display = 'block';
+                btn.style.display = 'none';
+                
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 2000);
+
+            } catch (err) {
+                errorDiv.textContent = err.message || "حدث خطأ أثناء التسجيل.";
+                errorDiv.style.display = 'block';
+                btn.disabled = false;
+                btn.innerHTML = 'إنشاء حسابي الآن <i class="fas fa-user-plus"></i>';
+            }
+        });
+    </script>
+    <script src="js/main.js"></script>
+</body>
+</html>

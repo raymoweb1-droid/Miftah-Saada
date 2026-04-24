@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مفتاح السعادة | الرئيسية</title>
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase.js"></script>
+
+    <style>
+        /* Page Specific Overrides */
+        .btn-cta {
+            background: var(--primary-color);
+            color: white;
+            padding: 15px 45px;
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 1.2rem;
+            text-decoration: none;
+            transition: 0.3s;
+            display: inline-block;
+        }
+
+        .btn-cta:hover {
+            background: #0959c8;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(11, 111, 251, 0.4);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo" style="text-decoration: none;">
+                <h1 class="logo-text" id="site-logo-name">Miftah <span>Saada</span></h1>
+            </a>
+            <nav class="nav-menu">
+                <ul class="nav-list">
+                    <li><a href="index.html" class="active">الرئيسية</a></li>
+                    <li><a href="shop.html">المتجر</a></li>
+                    <li><a href="contact.html">تواصل معنا</a></li>
+                </ul>
+            </nav>
+            <div class="nav-icons">
+                <a href="login.html" class="icon-btn">
+                    <i class="fas fa-user-circle"></i>
+                </a>
+                <a href="cart.html" class="icon-btn">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </a>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="menu-overlay"></div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero-section">
+        <div class="hero-content">
+            <h2 class="hero-title" id="hero-title">أحدث الهواتف الذكية بين يديك</h2>
+            <p class="hero-subtitle" id="hero-subtitle">اكتشف أقوى العروض والتخفيضات على مختلف الماركات العالمية</p>
+            <a href="shop.html" class="btn-cta">تسوق الآن</a>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section class="services">
+        <div class="container">
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-truck"></i></div>
+                    <h3>توصيل سريع</h3>
+                    <p>إلى جميع مدن المغرب</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon" style="color: #0B6FFB;"><i class="fas fa-shield-alt"></i></div>
+                    <h3>ضمان الجودة</h3>
+                    <p>منتجات أصلية 100%</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon" style="color: #0B6FFB;"><i class="fas fa-money-bill-wave"></i></div>
+                    <h3>الدفع عند الاستلام</h3>
+                    <p>الدفع آمن ومضمون</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Best Sellers -->
+    <section class="section-padding" style="background: white;">
+        <div class="container">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px;">
+                <a href="shop.html" style="color: #64748b; text-decoration: none; font-weight: 700;"><i class="fas fa-arrow-left" style="margin-left: 10px;"></i> عرض الكل</a>
+                <h2 style="font-size: 2rem; font-weight: 900;">الأكثر مبيعاً</h2>
+            </div>
+            
+            <div class="products-grid" id="homepage-products">
+                <!-- Data loaded via main.js -->
+                <div style="grid-column: 1/-1; text-align: center; padding: 50px;">
+                    <p style="color: #64748b;">جاري تحميل المنتجات...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brands Section -->
+    <section class="brands">
+        <div class="container">
+            <h2 class="section-title">تصفح حسب الماركة</h2>
+            <div class="brands-grid">
+                <a href="shop.html?brand=Apple" class="brand-card">Apple</a>
+                <a href="shop.html?brand=Samsung" class="brand-card">Samsung</a>
+                <a href="shop.html?brand=Xiaomi" class="brand-card">Xiaomi</a>
+                <a href="shop.html?brand=Oppo" class="brand-card">Oppo</a>
+                <a href="shop.html?brand=Huawei" class="brand-card">Huawei</a>
+                <a href="shop.html?brand=OnePlus" class="brand-card">OnePlus</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/212635939690" class="whatsapp-float" id="whatsapp-float-btn" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col" style="text-align: right;">
+                    <h4 class="footer-title">تواصل معنا</h4>
+                    <div class="contact-item">
+                        <span id="footer-location">تارودانت، المغرب</span>
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="contact-item">
+                        <span id="footer-phone">+212 635 939 690</span>
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <div class="contact-item">
+                        <span id="footer-whatsapp">+212 635 939 690</span>
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                </div>
+                
+                <div class="footer-col" style="text-align: right;">
+                    <h4 class="footer-title">روابط مهمة</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">الرئيسية</a></li>
+                        <li><a href="shop.html">المتجر</a></li>
+                        <li><a href="contact.html">تواصل معنا</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col" style="text-align: right;">
+                    <div class="footer-logo" id="footer-logo-name">Miftah <span>Saada</span></div>
+                    <p class="footer-desc" id="footer-description">متجر مفتاح السعادة هو وجهتك الأولى لأفضل الهواتف الذكية والإلكترونيات بأسعار تنافسية.</p>
+                    <div class="footer-social-links">
+                        <a href="#" id="footer-facebook" target="_blank"><i class="fab fa-facebook"></i></a>
+                        <a href="#" id="footer-instagram" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="#" id="footer-tiktok" target="_blank"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 30px;">
+                <p style="color: #64748b;" id="footer-copyright">جميع الحقوق محفوظة &copy; 2026 مفتاح السعادة</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Handle order success redirect
+        window.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            if (params.get('order_success') === 'true') {
+                // Small delay so showToast is ready
+                setTimeout(() => {
+                    if (window.showToast) {
+                        window.showToast('🎉 تم استلام طلبك بنجاح! سنتواصل معك قريباً.', 'success');
+                    }
+                    // Clean URL without reload
+                    window.history.replaceState({}, document.title, window.location.pathname);
+                }, 500);
+            }
+        });
+    </script>
+</body>
+</html>

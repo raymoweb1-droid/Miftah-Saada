@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تواصل معنا | مفتاح السعادة</title>
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase.js"></script>
+
+    <style>
+        :root {
+            --primary-color: #0B6FFB;
+            --secondary-color: #0f172a;
+            --primary-gradient: linear-gradient(135deg, #0B6FFB, #3b82f6);
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: #f8fafc;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: white;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo-text { font-size: 1.8rem; font-weight: 900; color: #1e293b; }
+        .logo-text span { color: var(--primary-color); }
+        .nav-list { display: flex; gap: 30px; list-style: none; }
+        .nav-list a { text-decoration: none; color: #64748b; font-weight: 700; transition: 0.3s; }
+        .nav-list a.active, .nav-list a:hover { color: var(--primary-color); }
+        .nav-icons { display: flex; gap: 20px; align-items: center; }
+        .icon-btn { font-size: 1.3rem; color: #1e293b; text-decoration: none; position: relative; }
+        .cart-count { position: absolute; top: -8px; right: -8px; background: var(--primary-color); color: white; font-size: 0.7rem; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; }
+
+        /* Contact Hero */
+        .contact-hero {
+            padding: 80px 0 40px;
+            text-align: center;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 40px;
+            margin-bottom: 80px;
+        }
+
+        /* Forms & Cards */
+        .contact-card {
+            background: white;
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.02);
+            border: 1px solid #f1f5f9;
+        }
+
+        .form-group { margin-bottom: 25px; text-align: right; }
+        .form-group label { display: block; margin-bottom: 10px; font-weight: 800; color: #1e293b; }
+        
+        .form-control {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #f1f5f9;
+            border-radius: 15px;
+            background: #f8fafc;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: 0.3s;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-color);
+            background: white;
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(11, 111, 251, 0.05);
+        }
+
+        .btn-send {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            padding: 18px;
+            border-radius: 15px;
+            font-weight: 900;
+            font-size: 1.1rem;
+            width: 100%;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            box-shadow: 0 10px 25px rgba(11, 111, 251, 0.2);
+        }
+
+        .btn-send:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(11, 111, 251, 0.3);
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+            background: #f8fafc;
+            border-radius: 20px;
+            margin-bottom: 15px;
+            text-decoration: none;
+            color: inherit;
+            transition: 0.3s;
+            border: 1px solid transparent;
+        }
+
+        .info-item:hover {
+            background: white;
+            border-color: var(--primary-color);
+            transform: translateX(-5px);
+        }
+
+        .info-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 15px;
+            background: rgba(11, 111, 251, 0.1);
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .map-container {
+            border-radius: 20px;
+            overflow: hidden;
+            height: 300px;
+            margin-top: 25px;
+            border: 1px solid #f1f5f9;
+        }
+
+        /* WhatsApp Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #25d366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+            z-index: 1000;
+            transition: 0.3s;
+        }
+
+        /* Footer */
+        .footer { background: #0f172a; color: white; padding: 80px 0 30px; text-align: right; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 50px; margin-bottom: 60px; }
+        .footer-logo { font-size: 2rem; font-weight: 900; margin-bottom: 20px; }
+        .footer-logo span { color: var(--primary-color); }
+        .footer-desc { color: #94a3b8; line-height: 1.8; margin-bottom: 20px; }
+        .footer-title { font-size: 1.3rem; font-weight: 800; margin-bottom: 25px; color: white; }
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 12px; }
+        .footer-links a { color: #94a3b8; text-decoration: none; transition: 0.3s; }
+        .footer-links a:hover { color: white; padding-right: 5px; }
+        .contact-item { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; justify-content: flex-end; color: #cbd5e1; }
+        .contact-item i { color: var(--primary-color); }
+
+        @media (max-width: 992px) {
+            .contact-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .navbar { z-index: 2001; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Announcement Bar -->
+
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo" style="text-decoration: none;">
+                <h1 class="logo-text" id="site-logo-name">Miftah <span>Saada</span></h1>
+            </a>
+            <nav class="nav-menu">
+                <ul class="nav-list">
+                    <li><a href="index.html">الرئيسية</a></li>
+                    <li><a href="shop.html">المتجر</a></li>
+                    <li><a href="contact.html" class="active">تواصل معنا</a></li>
+                </ul>
+            </nav>
+            <div class="nav-icons">
+                <a href="login.html" class="icon-btn">
+                    <i class="fas fa-user-circle"></i>
+                </a>
+                <a href="cart.html" class="icon-btn">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </a>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="menu-overlay"></div>
+
+    <div class="contact-hero container">
+        <h1 id="contact-hero-title" style="font-size: 3rem; font-weight: 900; margin-bottom: 15px;">تواصل معنا</h1>
+        <p id="contact-hero-subtitle" style="color: #64748b; font-size: 1.25rem;">نحن هنا للإجابة على جميع استفساراتكم على مدار الساعة</p>
+    </div>
+
+    <div class="container">
+        <div class="contact-grid">
+            
+            <!-- Message Form -->
+            <div class="contact-card">
+                <h2 style="margin-bottom: 30px; font-weight: 900; font-size: 1.8rem; text-align: right;">إرسال رسالة</h2>
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label>الاسم الكامل</label>
+                        <input type="text" id="c-name" class="form-control" placeholder="أدخل اسمك الكريم" required>
+                    </div>
+                    <div class="form-group">
+                        <label>البريد الإلكتروني</label>
+                        <input type="email" id="c-email" class="form-control" placeholder="example@mail.com">
+                    </div>
+                    <div class="form-group">
+                        <label>رسالتك</label>
+                        <textarea id="c-msg" class="form-control" rows="6" placeholder="كيف يمكننا مساعدتك اليوم؟" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-send" id="sendBtn">
+                        إرسال الآن <i class="fas fa-paper-plane"></i>
+                    </button>
+                </form>
+            </div>
+
+            <!-- Sidebar Info -->
+            <div style="display: flex; flex-direction: column;">
+                <div class="contact-card" style="padding: 30px;">
+                    <h3 style="margin-bottom: 25px; font-weight: 800; text-align: right;">معلومات التواصل</h3>
+                    
+                    <a href="tel:+212635939690" class="info-item" id="contact-phone-link">
+                        <div class="info-icon"><i class="fas fa-phone-alt"></i></div>
+                        <div style="text-align: right;">
+                            <p style="font-size: 0.8rem; color: #64748b; font-weight: 800; margin: 0;">اتصال هاتفي</p>
+                            <p id="contact-phone-text" style="font-weight: 900; margin: 0;">+212 635 939 690</p>
+                        </div>
+                    </a>
+
+                    <a href="https://wa.me/212635939690" class="info-item" id="contact-whatsapp-link">
+                        <div class="info-icon" style="color: #25d366; background: rgba(37, 211, 102, 0.1);"><i class="fab fa-whatsapp"></i></div>
+                        <div style="text-align: right;">
+                            <p style="font-size: 0.8rem; color: #64748b; font-weight: 800; margin: 0;">واتساب</p>
+                            <p style="font-weight: 900; margin: 0;">راسلنا مباشرة</p>
+                        </div>
+                    </a>
+
+                    <div class="info-item">
+                        <div class="info-icon" style="color: #f59e0b; background: rgba(245, 158, 11, 0.1);"><i class="fas fa-map-marker-alt"></i></div>
+                        <div style="text-align: right;">
+                            <p style="font-size: 0.8rem; color: #64748b; font-weight: 800; margin: 0;">المقر</p>
+                            <p id="contact-location-text" style="font-weight: 900; margin: 0;">تارودانت، المغرب</p>
+                        </div>
+                    </div>
+
+                    <a href="mailto:support@miftahsaada.com" class="info-item" id="contact-email-link">
+                        <div class="info-icon" style="color: #3b82f6; background: rgba(59, 130, 246, 0.1);"><i class="fas fa-envelope"></i></div>
+                        <div style="text-align: right;">
+                            <p style="font-size: 0.8rem; color: #64748b; font-weight: 800; margin: 0;">البريد الإلكتروني</p>
+                            <p id="contact-email-text" style="font-weight: 900; margin: 0;">support@miftahsaada.com</p>
+                        </div>
+                    </a>
+
+                    <div class="map-container">
+                        <iframe id="contact-map-iframe" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d109033.43577749007!2d-8.910325026938222!3d30.470535384666453!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xdbb07137ff7a885%3A0xe2bc194eb99f65c9!2z2KrYp9ix2YjYr9in2YbYqiwg2KfZhNmF2LrYsdio!5e0!3m2!1sar!2sma!4v1700000000000" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/212635939690" class="whatsapp-float" id="whatsapp-float-link" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col" style="text-align: right;">
+                    <h4 class="footer-title">تواصل معنا</h4>
+                    <div class="contact-item">
+                        <span id="footer-location">تارودانت، المغرب</span>
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="contact-item">
+                        <span id="footer-phone">+212 635 939 690</span>
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <div class="contact-item">
+                        <span id="footer-whatsapp">+212 635 939 690</span>
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                </div>
+                
+                <div class="footer-col" style="text-align: right;">
+                    <h4 class="footer-title">روابط مهمة</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">الرئيسية</a></li>
+                        <li><a href="shop.html">المتجر</a></li>
+                        <li><a href="contact.html">تواصل معنا</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col" style="text-align: right;">
+                    <div class="footer-logo" id="footer-logo-name">Miftah <span>Saada</span></div>
+                    <p class="footer-desc" id="footer-description">متجر مفتاح السعادة هو وجهتك الأولى لأفضل الهواتف الذكية والإلكترونيات بأسعار تنافسية.</p>
+                    <div class="footer-social-links">
+                        <a href="#" id="footer-facebook" target="_blank"><i class="fab fa-facebook"></i></a>
+                        <a href="#" id="footer-instagram" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="#" id="footer-tiktok" target="_blank"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 30px;">
+                <p style="color: #64748b;" id="footer-copyright">جميع الحقوق محفوظة &copy; 2026 مفتاح السعادة</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('sendBtn');
+            btn.disabled = true;
+            btn.innerHTML = 'جاري الإرسال... <i class="fas fa-spinner fa-spin"></i>';
+
+            const msgData = {
+                name: document.getElementById('c-name').value,
+                email: document.getElementById('c-email').value,
+                message: document.getElementById('c-msg').value,
+                status: 'unread',
+                created_at: new Date().toISOString()
+            };
+
+            if (window.supabaseClient) {
+                try {
+                    const { error } = await window.supabaseClient.from('messages').insert([msgData]);
+                    if (error) throw error;
+                    
+                    if(window.showToast) window.showToast("تم إرسال رسالتك بنجاح! شكراً لتواصلك معنا.");
+                    e.target.reset();
+                } catch (err) {
+                    if(window.showToast) window.showToast("عذراً، حدث خطأ: " + err.message, 'error');
+                }
+            } else {
+                if(window.showToast) window.showToast("حدث خطأ في الاتصال بالخادم.", 'error');
+            }
+
+            btn.disabled = false;
+            btn.innerHTML = 'إرسال الآن <i class="fas fa-paper-plane"></i>';
+        });
+    </script>
+</body>
+</html>

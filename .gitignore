@@ -1,0 +1,31 @@
+# ===========================
+# Miftah Saada - .gitignore
+# ===========================
+
+# System Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor Folders
+.vscode/
+.idea/
+*.suo
+*.user
+
+# Node (if used later)
+node_modules/
+npm-debug.log*
+
+# Environment & Secrets
+.env
+.env.local
+.env.production
+*.secret
+
+# Build outputs
+dist/
+build/
+
+# Logs
+*.log

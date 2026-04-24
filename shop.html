@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المتجر | مفتاح السعادة</title>
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase.js"></script>
+
+    <style>
+        /* Shop Specific Tweaks */
+        .results-count { color: #64748b; font-weight: 700; }
+        #price-display { text-align: center; font-weight: 800; margin-top: 15px; color: var(--primary-color); font-size: 1.2rem; }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo" style="text-decoration: none;">
+                <h1 class="logo-text" id="site-logo-name">Miftah <span>Saada</span></h1>
+            </a>
+            <nav class="nav-menu">
+                <ul class="nav-list">
+                    <li><a href="index.html">الرئيسية</a></li>
+                    <li><a href="shop.html" class="active">المتجر</a></li>
+                    <li><a href="contact.html">تواصل معنا</a></li>
+                </ul>
+            </nav>
+            <div class="nav-icons">
+                <a href="login.html" class="icon-btn">
+                    <i class="fas fa-user-circle"></i>
+                </a>
+                <a href="cart.html" class="icon-btn">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </a>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="menu-overlay"></div>
+
+    <main class="container">
+        <div class="shop-layout">
+            <!-- Sidebar Filters -->
+            <aside class="shop-sidebar">
+                <div class="filter-group">
+                    <h4>الفئات</h4>
+                    <div id="categories-filter-container">
+                        <p style="font-size: 0.8rem; color: #94a3b8;">جاري تحميل الفئات...</p>
+                    </div>
+                </div>
+                <div class="filter-group">
+                    <h4>السعر الأقصى</h4>
+                    <input type="range" id="price-slider" min="0" max="20000" step="100" value="20000">
+                    <p id="price-display" style="text-align: center; font-weight: 800; margin-top: 15px; color: var(--primary-color); font-size: 1.2rem;">20,000 درهم</p>
+                </div>
+            </aside>
+
+            <!-- Products Column -->
+            <div class="products-section">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px;">
+                    <h2 style="font-size: 2.2rem; font-weight: 900;">جميع المنتجات</h2>
+                    <div class="results-count" style="color: #64748b; font-weight: 700;">جاري التحميل...</div>
+                </div>
+
+                <div class="products-grid" id="shop-products-grid">
+                    <!-- Products rendered by main.js -->
+                    <div style="grid-column: 1/-1; text-align: center; padding: 100px;">
+                        <p style="color: #64748b; font-weight: 600;">جاري تحميل أحدث العروض...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/212635939690" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col" style="text-align: right;">
+                    <h4 class="footer-title">تواصل معنا</h4>
+                    <div class="contact-item">
+                        <span>تارودانت، المغرب</span>
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="contact-item">
+                        <span>+212 635 939 690</span>
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <div class="contact-item">
+                        <span>+212 635 939 690</span>
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                </div>
+                
+                <div class="footer-col" style="text-align: right;">
+                    <h4 class="footer-title">روابط مهمة</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">الرئيسية</a></li>
+                        <li><a href="shop.html">المتجر</a></li>
+                        <li><a href="contact.html">تواصل معنا</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col" style="text-align: right;">
+                    <div class="footer-logo" id="footer-logo-name">Miftah <span>Saada</span></div>
+                    <p class="footer-desc" id="footer-description">متجر مفتاح السعادة هو وجهتك الأولى لأفضل الهواتف الذكية والإلكترونيات بأسعار تنافسية.</p>
+                    <div class="footer-social-links">
+                        <a href="#" id="footer-facebook" target="_blank"><i class="fab fa-facebook"></i></a>
+                        <a href="#" id="footer-instagram" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="#" id="footer-tiktok" target="_blank"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 30px;">
+                <p style="color: #64748b;" id="footer-copyright">جميع الحقوق محفوظة &copy; 2026 مفتاح السعادة</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // ==========================================
+        // SHOP PAGE - خاص بصفحة المتجر فقط
+        // ==========================================
+        const SHOP_SUPABASE_URL = 'https://phqqxfkvixawzpyumasv.supabase.co';
+        const SHOP_SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBocXF4Zmt2aXhhd3pweXVtYXN2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY1Mjc1MjksImV4cCI6MjA5MjEwMzUyOX0.GTtvw3QTMChEPlM7T6izLpKQgI_63HxbkDf9oWLwT-0';
+
+        let allProducts = [];
+        let shopInitialized = false;
+        let shopClient = null;
+
+        function getShopClient() {
+            if (shopClient) return shopClient;
+            // Try window.supabaseClient first
+            if (window.supabaseClient) { shopClient = window.supabaseClient; return shopClient; }
+            // Fallback: create directly from CDN (like seeder.html)
+            if (window.supabase && window.supabase.createClient) {
+                shopClient = window.supabase.createClient(SHOP_SUPABASE_URL, SHOP_SUPABASE_KEY);
+                window.supabaseClient = shopClient;
+                return shopClient;
+            }
+            return null;
+        }
+
+        async function initShopProducts() {
+            if (shopInitialized) return;
+            shopInitialized = true;
+
+            const grid = document.getElementById('shop-products-grid');
+            if (grid) {
+                grid.innerHTML = `
+                    <div class="product-card skeleton-card"><div class="skeleton-img"></div><div class="skeleton-text"></div><div class="skeleton-text short"></div></div>
+                    <div class="product-card skeleton-card"><div class="skeleton-img"></div><div class="skeleton-text"></div><div class="skeleton-text short"></div></div>
+                    <div class="product-card skeleton-card"><div class="skeleton-img"></div><div class="skeleton-text"></div><div class="skeleton-text short"></div></div>
+                    <div class="product-card skeleton-card"><div class="skeleton-img"></div><div class="skeleton-text"></div><div class="skeleton-text short"></div></div>
+                `;
+            }
+
+            const client = getShopClient();
+            if (!client) {
+                console.error('Supabase CDN or client not available!');
+                if (grid) grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:80px; color:#ef4444;">
+                    <p style="font-weight:800; font-size:1.2rem;">⚠️ لم يتم تحميل مكتبة Supabase</p>
+                    <p style="font-size:0.9rem; margin-top:10px; color:#64748b;">تأكد من اتصالك بالإنترنت وأعد تحميل الصفحة</p>
+                </div>`;
+                return;
+            }
+
+            // Load Categories for filtering
+            loadFilterCategories(client);
+
+            try {
+                const { data, error } = await client.from('products').select('*').order('price', { ascending: true });
+
+                if (error) {
+                    console.error('Supabase Error loading products:', error);
+                    if (grid) grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:80px; color:#ef4444;">
+                        <p style="font-weight:800; font-size:1.2rem;">❌ خطأ في تحميل المنتجات</p>
+                        <p style="font-size:0.9rem; margin-top:10px; color:#64748b;">${error.message}</p>
+                        <p style="font-size:0.8rem; margin-top:5px; background:#fef2f2; padding:10px; border-radius:8px; color:#991b1b;">إذا ظهر خطأ RLS، اذهب إلى Supabase Dashboard وفعّل سياسة القراءة العامة على جدول products</p>
+                    </div>`;
+                    return;
+                }
+
+                if (!data || data.length === 0) {
+                    if (grid) grid.innerHTML = '<div style="grid-column:1/-1; text-align:center; padding:80px; color:#64748b;"><p style="font-weight:700;">لا توجد منتجات متوفرة حالياً.</p></div>';
+                    return;
+                }
+
+                allProducts = data;
+
+                // Check URL params for brand filter (from index.html brand cards)
+                const urlParams = new URLSearchParams(window.location.search);
+                const brandParam = urlParams.get('brand');
+
+                applyShopFilters(brandParam);
+
+            } catch (e) {
+                console.error('Exception in initShopProducts:', e);
+                if (grid) grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:80px; color:#ef4444;">❌ ${e.message}</div>`;
+            }
+        }
+
+        function applyShopFilters(forceBrand = null) {
+            const grid = document.getElementById('shop-products-grid');
+            if (!grid || allProducts.length === 0) return;
+
+            const maxPrice = parseInt(document.getElementById('price-slider')?.value || 20000);
+            const checkedCategories = Array.from(document.querySelectorAll('.filter-category:checked')).map(cb => cb.value);
+
+            let filtered = allProducts.filter(prod => {
+                const priceOk = parseFloat(prod.price) <= maxPrice;
+                const catOk = checkedCategories.length === 0 || checkedCategories.includes(prod.category);
+                const brandOk = !forceBrand || prod.brand === forceBrand;
+                return priceOk && catOk && brandOk;
+            });
+
+            // Update results count
+            const resultsCount = document.querySelector('.results-count');
+            if (resultsCount) resultsCount.textContent = `${filtered.length} منتج`;
+
+            if (filtered.length === 0) {
+                grid.innerHTML = '<div style="grid-column:1/-1; text-align:center; padding:80px;"><p style="color:#64748b; font-weight:700;">لا توجد منتجات تطابق معايير البحث</p></div>';
+                return;
+            }
+
+            grid.innerHTML = filtered.map(prod => {
+                const thumbUrl = prod.media_urls?.[0]?.url || 'assets/no-image.jpg';
+                return `
+                    <div class="product-card">
+                        <div class="product-img">
+                            <a href="product.html?id=${prod.id}"><img src="${thumbUrl}" alt="${prod.name}" loading="lazy"></a>
+                        </div>
+                        <div class="product-info">
+                            <span class="category">${prod.brand || 'منتج أصلي'}</span>
+                            <h3><a href="product.html?id=${prod.id}">${prod.name}</a></h3>
+                            <div class="price">
+                                <span class="current">${parseFloat(prod.price).toLocaleString()} درهم</span>
+                            </div>
+                            <button class="btn btn-outline w-100 add-to-cart"
+                                data-id="${prod.id}" data-name="${prod.name}" data-price="${prod.price}" data-img="${thumbUrl}">
+                                <i class="fas fa-shopping-cart"></i> أضف إلى السلة
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Price slider
+        const priceSlider = document.getElementById('price-slider');
+        const priceDisplay = document.getElementById('price-display');
+        if (priceSlider) {
+            priceSlider.oninput = function() {
+                priceDisplay.innerHTML = parseInt(this.value).toLocaleString() + ' درهم';
+                applyShopFilters();
+            };
+        }
+
+        // Launch after full page load (ensures CDN scripts are ready)
+        window.addEventListener('load', () => {
+            initShopProducts();
+        });
+
+        async function loadFilterCategories(client) {
+            const container = document.getElementById('categories-filter-container');
+            if (!container) return;
+
+            try {
+                const { data: categories, error } = await client.from('categories').select('*').order('name');
+                if (error) throw error;
+
+                if (!categories || categories.length === 0) {
+                    container.innerHTML = '<p style="font-size: 0.8rem; color: #94a3b8;">لا توجد فئات.</p>';
+                    return;
+                }
+
+                container.innerHTML = categories.map(cat => `
+                    <label>
+                        <input type="checkbox" class="filter-category" value="${cat.slug}" style="display:none;">
+                        <span class="cat-dot"></span>
+                        ${cat.name}
+                    </label>
+                `).join('');
+
+                // Re-attach listeners to new checkboxes
+                document.querySelectorAll('.filter-category').forEach(cb => {
+                    cb.addEventListener('change', () => applyShopFilters());
+                });
+            } catch (err) {
+                console.error("Error loading categories:", err);
+                container.innerHTML = '<p style="font-size: 0.8rem; color: #ef4444;">فشل تحميل الفئات.</p>';
+            }
+        }
+    </script>
+</body>
+</html>
+

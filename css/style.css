@@ -193,13 +193,37 @@ ul {
 
 /* Hero Section */
 .hero {
-    height: calc(100vh - 80px);
+    height: 90vh;
     min-height: 500px;
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1556656793-08538906a9f8?auto=format&fit=crop&q=80&w=2000') center/cover;
+    background-color: #0f172a;
+    background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url('https://images.unsplash.com/photo-1556656793-08538906a9f8?auto=format&fit=crop&q=80&w=2000') center/cover no-repeat;
     display: flex;
     align-items: center;
+    justify-content: center;
     text-align: center;
-    color: var(--white);
+    color: white;
+    padding: 0 20px;
+}
+
+.hero-title {
+    font-size: clamp(2.2rem, 6vw, 4.5rem);
+    font-weight: 900;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.hero-subtitle {
+    font-size: 1.2rem;
+    color: #cbd5e1;
+    margin-bottom: 40px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero-content {
+    max-width: 800px;
+    margin: 0 auto;
 }
 
 .hero-content {
@@ -933,34 +957,7 @@ input[type="range"] {
     margin-top: 20px;
 }
 
-    /* Hero Section */
-    .hero {
-        background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('../assets/hero-bg.png');
-        background-size: cover;
-        background-position: center;
-        height: 90vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        color: white;
-        padding: 0 20px;
-    }
-
-    .hero-title {
-        font-size: clamp(2.5rem, 6vw, 4.5rem);
-        font-weight: 900;
-        margin-bottom: 20px;
-    }
-
-    .hero-subtitle {
-        font-size: 1.4rem;
-        color: #cbd5e1;
-        margin-bottom: 40px;
-        max-width: 800px;
-        margin-left: auto;
-        margin-right: auto;
-    }
+    /* Hero section override styles removed - defined globally above */
 
     /* Service Cards */
     .services {

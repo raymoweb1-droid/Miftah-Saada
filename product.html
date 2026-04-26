@@ -14,6 +14,15 @@
 
 </head>
 <body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader-content">
+            <div class="loader-logo">Miftah Saada</div>
+            <div class="loader-bar">
+                <div class="bar-progress"></div>
+            </div>
+        </div>
+    </div>
 
     <!-- Navbar -->
     <header class="navbar">
@@ -79,14 +88,15 @@
                     <div class="video-container" id="video-embed"></div>
                 </div>
 
-                <div class="specs-grid">
-                    <h4>المواصفات التقنية</h4>
-                    <ul class="specs-list" id="prod-specs">
-                        <li><i class="fas fa-microchip"></i> معالج قوي</li>
-                        <li><i class="fas fa-battery-full"></i> بطارية طويلة الأمد</li>
-                        <li><i class="fas fa-camera"></i> كاميرا احترافية</li>
-                        <li><i class="fas fa-memory"></i> مساحة تخزين واسعة</li>
-                    </ul>
+                <div class="specs-container-box">
+                    <h3 class="specs-title-main">المواصفات التقنية</h3>
+                    <div class="specs-table-wrapper">
+                        <table class="specs-table">
+                            <tbody id="prod-specs">
+                                <tr><td colspan="2" style="text-align:center; padding:20px; opacity:0.5;">جاري تحميل المواصفات...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
 
                 <button id="add-to-cart-btn" class="add-to-cart-big">
@@ -105,23 +115,25 @@
     <footer class="footer">
         <div class="container">
             <div class="footer-grid">
-                <div class="footer-col" style="text-align: right;">
+                <!-- معلومات الاتصال -->
+                <div class="footer-col">
                     <h4 class="footer-title">تواصل معنا</h4>
                     <div class="contact-item">
-                        <span id="footer-location">تارودانت، المغرب</span>
                         <i class="fas fa-map-marker-alt"></i>
+                        <span id="footer-location">تارودانت، المغرب</span>
                     </div>
                     <div class="contact-item">
-                        <span id="footer-phone">+212 635 939 690</span>
                         <i class="fas fa-phone-alt"></i>
+                        <span id="footer-phone">+212 635 939 690</span>
                     </div>
                     <div class="contact-item">
-                        <span id="footer-whatsapp">+212 635 939 690</span>
                         <i class="fab fa-whatsapp"></i>
+                        <span id="footer-whatsapp">+212 635 939 690</span>
                     </div>
                 </div>
                 
-                <div class="footer-col" style="text-align: right;">
+                <!-- روابط سريعة -->
+                <div class="footer-col">
                     <h4 class="footer-title">روابط مهمة</h4>
                     <ul class="footer-links">
                         <li><a href="index.html">الرئيسية</a></li>
@@ -130,16 +142,18 @@
                     </ul>
                 </div>
 
-                <div class="footer-col" style="text-align: right;">
+                <!-- الوصف واللوغو -->
+                <div class="footer-col">
                     <div class="footer-logo" id="footer-logo-name">Miftah <span>Saada</span></div>
                     <p class="footer-desc" id="footer-description">متجر مفتاح السعادة هو وجهتك الأولى لأفضل الهواتف الذكية والإلكترونيات بأسعار تنافسية.</p>
                     <div class="footer-social-links">
-                        <a href="#" id="footer-facebook" target="_blank"><i class="fab fa-facebook"></i></a>
+                        <a href="#" id="footer-facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
                         <a href="#" id="footer-instagram" target="_blank"><i class="fab fa-instagram"></i></a>
                         <a href="#" id="footer-tiktok" target="_blank"><i class="fab fa-tiktok"></i></a>
                     </div>
                 </div>
             </div>
+            
             <div class="footer-bottom">
                 <p id="footer-copyright">جميع الحقوق محفوظة &copy; 2026 مفتاح السعادة</p>
             </div>
@@ -164,7 +178,22 @@
                 document.title = `${prod.name} | مفتاح السعادة`;
                 document.getElementById('prod-name').textContent = prod.name;
                 document.getElementById('prod-brand').textContent = prod.brand || 'أخرى';
-                document.getElementById('prod-price').textContent = `${parseFloat(prod.price).toLocaleString()} درهم`;
+                const priceBox = document.querySelector('.price-box');
+                const hasDiscount = prod.old_price && parseFloat(prod.old_price) > parseFloat(prod.price);
+                
+                if (hasDiscount) {
+                    const discountPercent = Math.round(((prod.old_price - prod.price) / prod.old_price) * 100);
+                    priceBox.innerHTML = `
+                        <div style="display:flex; align-items:center; gap:15px;">
+                            <span class="current-price" id="prod-price">${parseFloat(prod.price).toLocaleString()} درهم</span>
+                            <span class="old-price-detail" style="text-decoration:line-through; color:#94a3b8; font-size:1.1rem;">${parseFloat(prod.old_price).toLocaleString()} درهم</span>
+                            <span class="discount-badge-detail" style="background:#ffc107; color:black; padding:4px 10px; border-radius:8px; font-weight:900; font-size:0.9rem;">توفير ${discountPercent}%</span>
+                        </div>
+                    `;
+                } else {
+                    document.getElementById('prod-price').textContent = `${parseFloat(prod.price).toLocaleString()} درهم`;
+                }
+
                 document.getElementById('prod-desc').textContent = prod.description || 'لا يوجد وصف متاح لهذا المنتج حالياً.';
                 
                 
@@ -206,24 +235,21 @@
                     stock.style.background = 'rgba(239, 68, 68, 0.1)';
                 }
 
-                // Populate Specs
-                const specsList = document.getElementById('prod-specs');
+                // Populate Specs as Table Rows
+                const specsBody = document.getElementById('prod-specs');
                 if (prod.specs && Object.keys(prod.specs).length > 0) {
-                    specsList.innerHTML = Object.entries(prod.specs).map(([key, value]) => {
-                        let icon = 'fa-info-circle';
-                        const lowerKey = key.toLowerCase();
-                        if (lowerKey.includes('شاشة') || lowerKey.includes('screen')) icon = 'fa-mobile-alt';
-                        if (lowerKey.includes('معالج') || lowerKey.includes('processor') || lowerKey.includes('cpu')) icon = 'fa-microchip';
-                        if (lowerKey.includes('بطارية') || lowerKey.includes('battery')) icon = 'fa-battery-full';
-                        if (lowerKey.includes('كاميرا') || lowerKey.includes('camera')) icon = 'fa-camera';
-                        if (lowerKey.includes('ذاكرة') || lowerKey.includes('ram') || lowerKey.includes('memory')) icon = 'fa-memory';
-                        if (lowerKey.includes('تخزين') || lowerKey.includes('storage')) icon = 'fa-hdd';
-                        if (lowerKey.includes('نظام') || lowerKey.includes('os')) icon = 'fa-android';
-                        
-                        return `<li><i class="fas ${icon}"></i> <strong>${key}:</strong> ${value}</li>`;
+                    specsBody.innerHTML = Object.entries(prod.specs).map(([key, value]) => {
+                        return `
+                            <tr>
+                                <td class="spec-label">
+                                    <span>${key}</span>
+                                </td>
+                                <td class="spec-value">${value}</td>
+                            </tr>
+                        `;
                     }).join('');
                 } else {
-                    specsList.innerHTML = '<li style="grid-column: 1/-1; justify-content: center; opacity: 0.6;">لا توجد مواصفات تقنية متوفرة حالياً.</li>';
+                    specsBody.innerHTML = '<tr><td colspan="2" style="text-align:center; padding:40px; color:#94a3b8;">لا توجد مواصفات تقنية متوفرة حالياً.</td></tr>';
                 }
 
                 // Handle Add to Cart with all selected data
@@ -235,6 +261,9 @@
                     }
                 });
             }
+
+            // Hide preloader after data is processed
+            if (window.hidePreloader) window.hidePreloader();
         });
 
         function switchGalleryImage(url, el) {

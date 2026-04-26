@@ -2,6 +2,27 @@ document.addEventListener('DOMContentLoaded', () => {
     const WHATSAPP_NUMBER = '212635939690';
     const ADMIN_EMAIL = 'raymoweb1@gmail.com';
 
+    // --- Preloader Control ---
+    window.hidePreloader = function() {
+        const preloader = document.getElementById('preloader');
+        if (preloader) {
+            preloader.classList.add('fade-out');
+            setTimeout(() => {
+                if (preloader && preloader.parentNode) preloader.parentNode.removeChild(preloader);
+            }, 800);
+        }
+    }
+
+    // Fallback: hide preloader after 5 seconds anyway
+    setTimeout(window.hidePreloader, 5000);
+
+    window.addEventListener('load', () => {
+        // Only hide if we aren't waiting for specific data in pages that use renderGlobalProducts
+        if (!document.querySelector('.products-grid') && !document.querySelector('.offers-grid')) {
+            window.hidePreloader();
+        }
+    });
+
     // Load Dynamic Settings Immediately
     loadSiteSettings();
 
@@ -142,7 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- جلب وعرض المنتجات مع Skeleton Screen ---
     async function renderGlobalProducts() {
-        const productsGrids = document.querySelectorAll('.products-grid');
+        const productsGrids = document.querySelectorAll('.products-grid, .offers-grid');
         if (productsGrids.length === 0) return;
 
         // إظهار هيكل التحميل (Skeleton)
@@ -157,7 +178,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (!window.supabaseClient) return;
 
-        const { data: cloudProducts, error } = await window.supabaseClient.from('products').select('*');
+        const { data: cloudProducts, error } = await window.supabaseClient.from('products').select('*').order('created_at', { ascending: false });
 
         if (error) {
             console.error("Supabase Error:", error);
@@ -171,10 +192,23 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         productsGrids.forEach(grid => {
-            grid.innerHTML = cloudProducts.map(prod => {
+            const isOffers = grid.classList.contains('offers-grid');
+            let displayedProducts = [...cloudProducts];
+            
+            if (isOffers) {
+                // Priority to products with old_price
+                const discounted = cloudProducts.filter(p => p.old_price && p.old_price > p.price);
+                displayedProducts = discounted.length > 0 ? discounted.slice(0, 4) : cloudProducts.slice(0, 4);
+            }
+
+            grid.innerHTML = displayedProducts.map(prod => {
                 const thumbUrl = prod.media_urls?.[0]?.url || 'assets/no-image.jpg';
+                const hasDiscount = prod.old_price && parseFloat(prod.old_price) > parseFloat(prod.price);
+                const discountPercent = hasDiscount ? Math.round(((prod.old_price - prod.price) / prod.old_price) * 100) : 0;
+
                 return `
                     <div class="product-card">
+                        ${hasDiscount ? `<div class="discount-badge">-${discountPercent}%</div>` : ''}
                         <div class="product-img">
                             <a href="product.html?id=${prod.id}"><img src="${thumbUrl}" alt="${prod.name}" loading="lazy"></a>
                         </div>
@@ -183,16 +217,20 @@ document.addEventListener('DOMContentLoaded', () => {
                             <h3><a href="product.html?id=${prod.id}">${prod.name}</a></h3>
                             <div class="price">
                                 <span class="current">${parseFloat(prod.price).toLocaleString()} درهم</span>
+                                ${hasDiscount ? `<span class="old">${parseFloat(prod.old_price).toLocaleString()} درهم</span>` : ''}
                             </div>
-                            <button class="btn btn-outline w-100 add-to-cart" 
+                            <button class="btn ${isOffers ? 'btn-yellow' : 'btn-outline'} w-100 add-to-cart" 
                                 data-id="${prod.id}" data-name="${prod.name}" data-price="${prod.price}" data-img="${thumbUrl}">
-                                <i class="fas fa-shopping-cart"></i> أضف إلى السلة
+                                <i class="fas ${isOffers ? 'fa-cart-plus' : 'fa-shopping-cart'}"></i> أضف إلى السلة
                             </button>
                         </div>
                     </div>
                 `;
             }).join('');
         });
+
+        // Hide preloader after products are rendered
+        window.hidePreloader();
 
     }
 
@@ -346,9 +384,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.body.prepend(bar);
             }
             
-            // Create a wrapper for infinite scroll
-            const content = `<span>${s.announcement_text}</span>`.repeat(10);
-            bar.innerHTML = `<div class="marquee-wrapper">${content}</div>`;
+            // Create a robust infinite marquee with two identical groups
+            const separator = '<i class="fas fa-star" style="margin: 0 30px; font-size: 0.7rem; opacity: 0.6;"></i>';
+            const items = `<span>${s.announcement_text}${separator}</span>`.repeat(10);
+            bar.innerHTML = `
+                <div class="marquee-content">${items}</div>
+                <div class="marquee-content" aria-hidden="true">${items}</div>
+            `;
             bar.style.display = 'flex';
         }
 

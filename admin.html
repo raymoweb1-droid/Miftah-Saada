@@ -193,11 +193,30 @@
             margin-right: 12px;
         }
 
-        .cat-badge-phone { background: #eff6ff; color: #3b82f6; }
-        .cat-badge-laptop { background: #f5f3ff; color: #8b5cf6; }
-        .cat-badge-watch { background: #ecfdf5; color: #10b981; }
-        .cat-badge-acc { background: #fff7ed; color: #f59e0b; }
-        .cat-badge-default { background: #f8fafc; color: #64748b; }
+        .cat-badge-phone {
+            background: #eff6ff;
+            color: #3b82f6;
+        }
+
+        .cat-badge-laptop {
+            background: #f5f3ff;
+            color: #8b5cf6;
+        }
+
+        .cat-badge-watch {
+            background: #ecfdf5;
+            color: #10b981;
+        }
+
+        .cat-badge-acc {
+            background: #fff7ed;
+            color: #f59e0b;
+        }
+
+        .cat-badge-default {
+            background: #f8fafc;
+            color: #64748b;
+        }
 
         /* Super-Premium Cards */
         .card {
@@ -378,7 +397,8 @@
                 right: 0;
                 top: 0;
                 height: 100vh;
-                transform: translateX(280px); /* Match sidebar width */
+                transform: translateX(280px);
+                /* Match sidebar width */
                 transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             }
 
@@ -399,16 +419,25 @@
             }
 
             /* Responsive Tables */
-            .card { overflow-x: auto; padding: 20px 15px; }
-            table { min-width: 700px; }
+            .card {
+                overflow-x: auto;
+                padding: 20px 15px;
+            }
+
+            table {
+                min-width: 700px;
+            }
 
             /* Modal Adjustments */
-            .modal-card { 
-                padding: 30px 20px; 
-                width: 95% !important; 
+            .modal-card {
+                padding: 30px 20px;
+                width: 95% !important;
                 border-radius: 20px;
             }
-            .form-grid { grid-template-columns: 1fr; }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
 
             /* Sidebar spacing */
             .sidebar-menu a {
@@ -442,16 +471,20 @@
             .stat-grid {
                 grid-template-columns: 1fr;
             }
+
             .top-bar h3 {
                 font-size: 1.1rem;
             }
+
             h2 {
                 font-size: 1.5rem !important;
             }
+
             .sidebar-header h2 {
                 font-size: 1.2rem !important;
             }
         }
+
         .status-badge {
             padding: 5px 12px;
             border-radius: 20px;
@@ -459,9 +492,21 @@
             font-weight: 700;
         }
 
-        .status-badge.pending { background: #fef3c7; color: #d97706; }
-        .status-badge.completed, .status-badge.delivered { background: #d1fae5; color: #059669; }
-        .status-badge.cancelled { background: #fee2e2; color: #dc2626; }
+        .status-badge.pending {
+            background: #fef3c7;
+            color: #d97706;
+        }
+
+        .status-badge.completed,
+        .status-badge.delivered {
+            background: #d1fae5;
+            color: #059669;
+        }
+
+        .status-badge.cancelled {
+            background: #fee2e2;
+            color: #dc2626;
+        }
 
         .status-select {
             padding: 8px;
@@ -472,9 +517,17 @@
             outline: none;
         }
 
-        .status-select.pending { border-color: #f59e0b; }
-        .status-select.delivered { border-color: #10b981; }
-        .status-select.cancelled { border-color: #ef4444; }
+        .status-select.pending {
+            border-color: #f59e0b;
+        }
+
+        .status-select.delivered {
+            border-color: #10b981;
+        }
+
+        .status-select.cancelled {
+            border-color: #ef4444;
+        }
 
         .btn-icon {
             background: none;
@@ -485,7 +538,9 @@
             transition: 0.2s;
         }
 
-        .btn-icon:hover { transform: scale(1.1); }
+        .btn-icon:hover {
+            transform: scale(1.1);
+        }
 
         .badge-mini {
             background: #f1f5f9;
@@ -516,8 +571,8 @@
             margin-bottom: 8px;
         }
 
-        .form-group input, 
-        .form-group select, 
+        .form-group input,
+        .form-group select,
         .form-group textarea {
             width: 100%;
             padding: 14px 18px;
@@ -529,8 +584,8 @@
             background: #f8fafc;
         }
 
-        .form-group input:focus, 
-        .form-group select:focus, 
+        .form-group input:focus,
+        .form-group select:focus,
         .form-group textarea:focus {
             outline: none;
             border-color: var(--primary-color);
@@ -578,8 +633,13 @@
         }
 
         @media (max-width: 768px) {
-            .form-grid { grid-template-columns: 1fr; }
-            .modal-card { padding: 30px 20px; }
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-card {
+                padding: 30px 20px;
+            }
         }
 
         .media-previews {
@@ -666,7 +726,7 @@
             <li><a href="#" onclick="switchTab('settings', this)"><i class="fas fa-cog"></i> إعدادات الموقع</a></li>
             <li style="margin-top: 50px; padding: 0 10px;">
                 <button onclick="logout()"
-                    style="width: 100%; background: #ef4444; color: white; border: none; padding: 16px; border-radius: 16px; cursor: pointer; font-weight: 800; transition: 0.3s; box-shadow: 0 8px 15px rgba(239, 68, 68, 0.2);">خروج
+                    style="width: 100%; background: #01f50e; color: white; border: none; padding: 16px; border-radius: 16px; cursor: pointer; font-weight: 800; transition: 0.3s; box-shadow: 0 8px 15px rgba(239, 68, 68, 0.2);">خروج
                     آمن <i class="fas fa-sign-out-alt" style="margin-right: 8px;"></i></button>
             </li>
         </ul>
@@ -799,7 +859,8 @@
                 <div class="stat-grid">
                     <div class="card">
                         <h3>أكثر المنتجات مبيعاً</h3>
-                        <p style="color: #64748b; margin-bottom: 20px;">تحليل أداء المنتجات بناءً على الطلبيات المكتملة</p>
+                        <p style="color: #64748b; margin-bottom: 20px;">تحليل أداء المنتجات بناءً على الطلبيات المكتملة
+                        </p>
                         <table id="best-sellers-table">
                             <thead>
                                 <tr>
@@ -820,7 +881,8 @@
                 <div class="card" style="display: flex; justify-content: space-between; align-items: center;">
                     <h3>إدارة الأقسام</h3>
                     <div style="display: flex; gap: 10px;">
-                        <input type="text" id="new-category-name" placeholder="اسم القسم الجديد" style="padding: 10px; border: 1px solid #e2e8f0; border-radius: 8px;">
+                        <input type="text" id="new-category-name" placeholder="اسم القسم الجديد"
+                            style="padding: 10px; border: 1px solid #e2e8f0; border-radius: 8px;">
                         <button class="btn btn-primary" onclick="addCategory()">+ إضافة قسم</button>
                     </div>
                 </div>
@@ -891,7 +953,8 @@
             <section id="messages" class="tab-content">
                 <div class="card">
                     <h3>الرسائل الواردة</h3>
-                    <div id="messages-container" style="display: flex; flex-direction: column; gap: 15px; margin-top: 20px;"></div>
+                    <div id="messages-container"
+                        style="display: flex; flex-direction: column; gap: 15px; margin-top: 20px;"></div>
                 </div>
             </section>
 
@@ -900,7 +963,8 @@
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 35px;">
                     <div>
                         <h2 style="font-size: 2rem; font-weight: 900; color: #0f172a;">إعدادات الموقع العام</h2>
-                        <p style="color: #64748b; margin-top: 5px;">تحكم في كل تفصيلة في متجرك، من الألوان إلى معلومات التواصل</p>
+                        <p style="color: #64748b; margin-top: 5px;">تحكم في كل تفصيلة في متجرك، من الألوان إلى معلومات
+                            التواصل</p>
                     </div>
                     <button class="btn btn-primary" id="save-settings-btn" onclick="saveSettings()">
                         <i class="fas fa-save"></i> حفظ التغييرات
@@ -910,20 +974,28 @@
                 <!-- 1. Visual Identity Card -->
                 <div class="card" style="margin-bottom: 30px; border-top: 4px solid var(--primary-color);">
                     <h4 style="margin-bottom: 25px; display: flex; align-items: center; gap: 12px; font-size: 1.2rem;">
-                        <span style="background: var(--primary-color); color: white; width: 35px; height: 35px; border-radius: 10px; display: flex; align-items: center; justify-content: center;">
+                        <span
+                            style="background: var(--primary-color); color: white; width: 35px; height: 35px; border-radius: 10px; display: flex; align-items: center; justify-content: center;">
                             <i class="fas fa-palette"></i>
                         </span>
                         هوية المتجر البصرية
                     </h4>
-                    
+
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
                         <!-- Logo Upload -->
                         <div class="input-group">
-                            <label style="display: block; margin-bottom: 12px; font-weight: 800; color: #1e293b; font-size: 0.9rem;">شعار المتجر (Logo)</label>
-                            <div class="upload-zone" onclick="document.getElementById('logo-upload').click()" style="height: 150px; border-style: dashed; border-width: 3px; background: #f8fafc; display: flex; flex-direction: column; align-items: center; justify-content: center; border-radius: 20px; transition: 0.3s; cursor: pointer;">
-                                <i class="fas fa-image" style="font-size: 2.5rem; color: #cbd5e1; margin-bottom: 10px;"></i>
-                                <p id="logo-upload-status" style="font-size: 0.85rem; color: #64748b; font-weight: 700;">ارفع شعارك لاستخراج الألوان تلقائياً</p>
-                                <input type="file" id="logo-upload" hidden accept="image/*" onchange="handleLogoUpload(this)">
+                            <label
+                                style="display: block; margin-bottom: 12px; font-weight: 800; color: #1e293b; font-size: 0.9rem;">شعار
+                                المتجر (Logo)</label>
+                            <div class="upload-zone" onclick="document.getElementById('logo-upload').click()"
+                                style="height: 150px; border-style: dashed; border-width: 3px; background: #f8fafc; display: flex; flex-direction: column; align-items: center; justify-content: center; border-radius: 20px; transition: 0.3s; cursor: pointer;">
+                                <i class="fas fa-image"
+                                    style="font-size: 2.5rem; color: #cbd5e1; margin-bottom: 10px;"></i>
+                                <p id="logo-upload-status"
+                                    style="font-size: 0.85rem; color: #64748b; font-weight: 700;">ارفع شعارك لاستخراج
+                                    الألوان تلقائياً</p>
+                                <input type="file" id="logo-upload" hidden accept="image/*"
+                                    onchange="handleLogoUpload(this)">
                             </div>
                             <div id="logo-preview" class="media-previews" style="margin-top: 15px;"></div>
                         </div>
@@ -931,38 +1003,58 @@
                         <!-- Colors -->
                         <div style="display: flex; flex-direction: column; gap: 20px;">
                             <div class="input-group">
-                                <label style="display: block; margin-bottom: 12px; font-weight: 800; color: #1e293b; font-size: 0.9rem;">اللون الأساسي (Primary)</label>
+                                <label
+                                    style="display: block; margin-bottom: 12px; font-weight: 800; color: #1e293b; font-size: 0.9rem;">اللون
+                                    الأساسي (Primary)</label>
                                 <div style="display: flex; gap: 12px; align-items: center;">
                                     <div style="position: relative; width: 60px; height: 60px;">
-                                        <input type="color" id="setting-primary-color" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; z-index: 2;" oninput="document.getElementById('setting-primary-hex').value = this.value.toUpperCase(); updateLiveTheme()">
-                                        <div id="primary-color-preview" style="width: 100%; height: 100%; border-radius: 15px; border: 3px solid #f1f5f9; background: var(--primary-color);"></div>
+                                        <input type="color" id="setting-primary-color"
+                                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; z-index: 2;"
+                                            oninput="document.getElementById('setting-primary-hex').value = this.value.toUpperCase(); updateLiveTheme()">
+                                        <div id="primary-color-preview"
+                                            style="width: 100%; height: 100%; border-radius: 15px; border: 3px solid #f1f5f9; background: var(--primary-color);">
+                                        </div>
                                     </div>
-                                    <input type="text" id="setting-primary-hex" placeholder="#0B6FFB" class="form-control" style="flex: 1; padding: 18px; border-radius: 15px; border: 2px solid #f1f5f9; font-weight: 800; font-family: monospace;">
+                                    <input type="text" id="setting-primary-hex" placeholder="#0B6FFB"
+                                        class="form-control"
+                                        style="flex: 1; padding: 18px; border-radius: 15px; border: 2px solid #f1f5f9; font-weight: 800; font-family: monospace;">
                                 </div>
                             </div>
                             <div class="input-group">
-                                <label style="display: block; margin-bottom: 12px; font-weight: 800; color: #1e293b; font-size: 0.9rem;">اللون الثانوي (Secondary)</label>
+                                <label
+                                    style="display: block; margin-bottom: 12px; font-weight: 800; color: #1e293b; font-size: 0.9rem;">اللون
+                                    الثانوي (Secondary)</label>
                                 <div style="display: flex; gap: 12px; align-items: center;">
                                     <div style="position: relative; width: 60px; height: 60px;">
-                                        <input type="color" id="setting-secondary-color" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; z-index: 2;" oninput="document.getElementById('setting-secondary-hex').value = this.value.toUpperCase(); updateLiveTheme()">
-                                        <div id="secondary-color-preview" style="width: 100%; height: 100%; border-radius: 15px; border: 3px solid #f1f5f9; background: var(--secondary-color);"></div>
+                                        <input type="color" id="setting-secondary-color"
+                                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; z-index: 2;"
+                                            oninput="document.getElementById('setting-secondary-hex').value = this.value.toUpperCase(); updateLiveTheme()">
+                                        <div id="secondary-color-preview"
+                                            style="width: 100%; height: 100%; border-radius: 15px; border: 3px solid #f1f5f9; background: var(--secondary-color);">
+                                        </div>
                                     </div>
-                                    <input type="text" id="setting-secondary-hex" placeholder="#3b82f6" class="form-control" style="flex: 1; padding: 18px; border-radius: 15px; border: 2px solid #f1f5f9; font-weight: 800; font-family: monospace;">
+                                    <input type="text" id="setting-secondary-hex" placeholder="#3b82f6"
+                                        class="form-control"
+                                        style="flex: 1; padding: 18px; border-radius: 15px; border: 2px solid #f1f5f9; font-weight: 800; font-family: monospace;">
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div id="auto-color-success" style="display: none; background: #ecfdf5; color: #065f46; padding: 15px 20px; border-radius: 15px; align-items: center; gap: 15px; margin-top: 20px;">
+                    <div id="auto-color-success"
+                        style="display: none; background: #ecfdf5; color: #065f46; padding: 15px 20px; border-radius: 15px; align-items: center; gap: 15px; margin-top: 20px;">
                         <i class="fas fa-magic"></i>
-                        <p style="font-size: 0.85rem; font-weight: 700; margin: 0;">تم استخراج الألوان من شعارك بنجاح وتطبيقها على الموقع!</p>
+                        <p style="font-size: 0.85rem; font-weight: 700; margin: 0;">تم استخراج الألوان من شعارك بنجاح
+                            وتطبيقها على الموقع!</p>
                     </div>
                 </div>
 
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 30px;">
                     <!-- 2. Store General Info -->
                     <div class="card">
-                        <h4 style="margin-bottom: 25px; display: flex; align-items: center; gap: 12px; font-size: 1.2rem;">
-                            <span style="background: #3b82f6; color: white; width: 35px; height: 35px; border-radius: 10px; display: flex; align-items: center; justify-content: center;">
+                        <h4
+                            style="margin-bottom: 25px; display: flex; align-items: center; gap: 12px; font-size: 1.2rem;">
+                            <span
+                                style="background: #3b82f6; color: white; width: 35px; height: 35px; border-radius: 10px; display: flex; align-items: center; justify-content: center;">
                                 <i class="fas fa-store"></i>
                             </span>
                             معلومات المتجر العامة
@@ -977,7 +1069,8 @@
                         </div>
                         <div class="form-group">
                             <label>وصف المتجر (Footer)</label>
-                            <textarea id="setting-store-desc" rows="3" placeholder="متجر مفتاح السعادة هو وجهتك الأولى..."></textarea>
+                            <textarea id="setting-store-desc" rows="3"
+                                placeholder="متجر مفتاح السعادة هو وجهتك الأولى..."></textarea>
                         </div>
                         <div class="form-group">
                             <label>حقوق النشر (Copyright Text)</label>
@@ -987,8 +1080,10 @@
 
                     <!-- 3. Hero Section Card -->
                     <div class="card">
-                        <h4 style="margin-bottom: 25px; display: flex; align-items: center; gap: 12px; font-size: 1.2rem;">
-                            <span style="background: #f59e0b; color: white; width: 35px; height: 35px; border-radius: 10px; display: flex; align-items: center; justify-content: center;">
+                        <h4
+                            style="margin-bottom: 25px; display: flex; align-items: center; gap: 12px; font-size: 1.2rem;">
+                            <span
+                                style="background: #f59e0b; color: white; width: 35px; height: 35px; border-radius: 10px; display: flex; align-items: center; justify-content: center;">
                                 <i class="fas fa-image"></i>
                             </span>
                             واجهة الموقع (Hero Section)
@@ -999,14 +1094,17 @@
                         </div>
                         <div class="form-group">
                             <label>العنوان الفرعي</label>
-                            <textarea id="setting-hero-subtitle" rows="3" placeholder="اكتشف أقوى العروض والتخفيضات..."></textarea>
+                            <textarea id="setting-hero-subtitle" rows="3"
+                                placeholder="اكتشف أقوى العروض والتخفيضات..."></textarea>
                         </div>
                         <div class="form-group">
                             <label>صورة الخلفية الرئيسية</label>
                             <div class="upload-zone" onclick="document.getElementById('hero-upload').click()">
-                                <i class="fas fa-cloud-upload-alt" style="font-size: 2rem; color: #cbd5e1; margin-bottom: 10px;"></i>
+                                <i class="fas fa-cloud-upload-alt"
+                                    style="font-size: 2rem; color: #cbd5e1; margin-bottom: 10px;"></i>
                                 <p id="hero-upload-status">اضغط هنا لرفع صورة جديدة</p>
-                                <input type="file" id="hero-upload" hidden accept="image/*" onchange="handleHeroUpload(this)">
+                                <input type="file" id="hero-upload" hidden accept="image/*"
+                                    onchange="handleHeroUpload(this)">
                             </div>
                             <div id="hero-preview" class="media-previews" style="margin-top: 15px;"></div>
                         </div>
@@ -1014,8 +1112,10 @@
 
                     <!-- 4. Contact & Social -->
                     <div class="card">
-                        <h4 style="margin-bottom: 25px; display: flex; align-items: center; gap: 12px; font-size: 1.2rem;">
-                            <span style="background: #10b981; color: white; width: 35px; height: 35px; border-radius: 10px; display: flex; align-items: center; justify-content: center;">
+                        <h4
+                            style="margin-bottom: 25px; display: flex; align-items: center; gap: 12px; font-size: 1.2rem;">
+                            <span
+                                style="background: #10b981; color: white; width: 35px; height: 35px; border-radius: 10px; display: flex; align-items: center; justify-content: center;">
                                 <i class="fas fa-phone-alt"></i>
                             </span>
                             التواصل والشبكات الاجتماعية
@@ -1051,8 +1151,10 @@
 
                     <!-- 5. Contact Page Details -->
                     <div class="card">
-                        <h4 style="margin-bottom: 25px; display: flex; align-items: center; gap: 12px; font-size: 1.2rem;">
-                            <span style="background: #6366f1; color: white; width: 35px; height: 35px; border-radius: 10px; display: flex; align-items: center; justify-content: center;">
+                        <h4
+                            style="margin-bottom: 25px; display: flex; align-items: center; gap: 12px; font-size: 1.2rem;">
+                            <span
+                                style="background: #6366f1; color: white; width: 35px; height: 35px; border-radius: 10px; display: flex; align-items: center; justify-content: center;">
                                 <i class="fas fa-map-marked-alt"></i>
                             </span>
                             إعدادات صفحة التواصل
@@ -1063,7 +1165,8 @@
                         </div>
                         <div class="form-group">
                             <label>وصف صفحة التواصل</label>
-                            <textarea id="setting-contact-hero-subtitle" rows="2" placeholder="نحن هنا للإجابة على جميع استفساراتكم..."></textarea>
+                            <textarea id="setting-contact-hero-subtitle" rows="2"
+                                placeholder="نحن هنا للإجابة على جميع استفساراتكم..."></textarea>
                         </div>
                         <div class="form-group">
                             <label>البريد الإلكتروني الرسمي</label>
@@ -1071,7 +1174,8 @@
                         </div>
                         <div class="form-group">
                             <label>رابط خريطة Google (Embed URL)</label>
-                            <input type="text" id="setting-contact-map" placeholder="https://www.google.com/maps/embed?...">
+                            <input type="text" id="setting-contact-map"
+                                placeholder="https://www.google.com/maps/embed?...">
                         </div>
                     </div>
                 </div>
@@ -1082,18 +1186,22 @@
                         <i class="fas fa-user-shield"></i>
                         حماية الحساب وإدارة الدخول
                     </h4>
-                    <p style="font-size: 0.9rem; color: #be123c; margin-bottom: 20px; font-weight: 600;">تنبيه: تغيير هذه البيانات سيغير وسيلة دخولك للوحة التحكم.</p>
+                    <p style="font-size: 0.9rem; color: #be123c; margin-bottom: 20px; font-weight: 600;">تنبيه: تغيير
+                        هذه البيانات سيغير وسيلة دخولك للوحة التحكم.</p>
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
                         <div class="form-group">
                             <label style="color: #be123c;">البريد الإلكتروني الجديد</label>
-                            <input type="email" id="admin-new-email" placeholder="example@gmail.com" style="border-color: #fecdd3;">
+                            <input type="email" id="admin-new-email" placeholder="example@gmail.com"
+                                style="border-color: #fecdd3;">
                         </div>
                         <div class="form-group">
                             <label style="color: #be123c;">كلمة المرور الجديدة</label>
-                            <input type="password" id="admin-new-password" placeholder="••••••••" style="border-color: #fecdd3;">
+                            <input type="password" id="admin-new-password" placeholder="••••••••"
+                                style="border-color: #fecdd3;">
                         </div>
                     </div>
-                    <button class="btn" style="background: #e11d48; color: white; width: auto; margin-top: 10px;" onclick="updateAdminSecurity()">
+                    <button class="btn" style="background: #e11d48; color: white; width: auto; margin-top: 10px;"
+                        onclick="updateAdminSecurity()">
                         <i class="fas fa-sync-alt"></i> تحديث بيانات الأمان
                     </button>
                     <p id="security-status" style="margin-top: 15px; font-size: 0.85rem; font-weight: 700;"></p>
@@ -1111,16 +1219,22 @@
                 <h3 id="modal-title" style="font-size: 1.8rem; font-weight: 800; color: #0f172a;">إضافة منتج جديد</h3>
                 <p style="color: #64748b; margin-top: 5px;">أدخل معلومات المنتج بعناية ليتم عرضه بشكل جذاب</p>
             </div>
-            
+
             <form id="productForm">
                 <div class="form-grid">
                     <div class="form-group">
                         <label>عنوان المنتج</label>
                         <input type="text" id="p-name" required>
                     </div>
-                    <div class="form-group">
-                        <label>السعر (درهم)</label>
-                        <input type="number" id="p-price" required>
+                    <div class="form-group" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                        <div>
+                            <label>السعر الحالي (درهم)</label>
+                            <input type="number" id="p-price" required>
+                        </div>
+                        <div>
+                            <label>السعر قبل (اختياري)</label>
+                            <input type="number" id="p-old-price" placeholder="للعروض">
+                        </div>
                     </div>
                 </div>
                 <div class="form-grid">
@@ -1270,7 +1384,7 @@
             const overlay = document.getElementById('sidebar-overlay');
             const isActive = sidebar.classList.toggle('active');
             overlay.classList.toggle('active');
-            
+
             // Prevent body scroll on mobile
             if (window.innerWidth <= 992) {
                 document.body.style.overflow = isActive ? 'hidden' : '';
@@ -1383,7 +1497,7 @@
             const today = new Date();
             const last7Days = [];
             const dayNames = ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
-            
+
             // Create slots for last 7 days
             for (let i = 6; i >= 0; i--) {
                 const d = new Date();
@@ -1427,7 +1541,12 @@
                     <td>${o.customer_name}</td>
                     <td>${new Date(o.created_at).toLocaleDateString('ar-MA')}</td>
                     <td>${o.total_price} درهم</td>
-                    <td><span class="status-badge ${o.status}">${o.status === 'pending' ? 'معلق' : 'مكتمل'}</span></td>
+                    <td>
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <span class="status-badge ${o.status}">${o.status === 'pending' ? 'معلق' : 'مكتمل'}</span>
+                            <button onclick="printOrderTicket('${o.id}')" class="btn-icon" style="color: #64748b;" title="طباعة التيكيت"><i class="fas fa-print"></i></button>
+                        </div>
+                    </td>
                 </tr>
             `).join('');
         }
@@ -1449,10 +1568,10 @@
                     tbody.innerHTML = `<tr><td colspan="6" style="color:red; text-align:center; padding: 20px;">خطأ Supabase: ${JSON.stringify(error)}</td></tr>`;
                     return;
                 }
-                
+
                 if (!data || data.length === 0) {
-                     tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; color:#64748b; padding: 20px;">لا توجد منتجات حالياً.</td></tr>';
-                     return;
+                    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; color:#64748b; padding: 20px;">لا توجد منتجات حالياً.</td></tr>';
+                    return;
                 }
 
                 tbody.innerHTML = data.map(p => `
@@ -1460,7 +1579,10 @@
                         <td><img src="${p.media_urls?.[0]?.url || 'assets/no-image.jpg'}" width="40" height="40" style="object-fit:cover; border-radius:5px;"></td>
                         <td>${p.name}</td>
                         <td>${p.category || 'غير مصنف'}</td>
-                        <td>${p.price} درهم</td>
+                        <td>
+                            ${p.price} درهم 
+                            ${p.old_price ? `<br><small style="text-decoration:line-through; color:#94a3b8;">${p.old_price} درهم</small>` : ''}
+                        </td>
                         <td>${p.stock || 0}</td>
                         <td>
                             <a href="product.html?id=${p.id}" target="_blank" class="btn-icon" style="color: #3b82f6;"><i class="fas fa-eye"></i></a>
@@ -1668,7 +1790,7 @@
             selectedFiles.forEach((file, index) => {
                 const item = document.createElement('div');
                 item.className = 'preview-item';
-                
+
                 let src = '';
                 if (file instanceof File) {
                     src = URL.createObjectURL(file);
@@ -1750,14 +1872,140 @@
                     <td>${o.items ? o.items.length : 0} قطع</td>
                     <td>${o.total_price} درهم</td>
                     <td>
-                        <select onchange="updateOrderStatus('${o.id}', this.value)" class="status-select ${o.status}">
-                            <option value="pending" ${o.status === 'pending' ? 'selected' : ''}>معلق</option>
-                            <option value="delivered" ${o.status === 'delivered' ? 'selected' : ''}>تم التوصيل</option>
-                            <option value="cancelled" ${o.status === 'cancelled' ? 'selected' : ''}>ملغي</option>
-                        </select>
+                        <div style="display:flex; gap:10px; align-items:center;">
+                            <select onchange="updateOrderStatus('${o.id}', this.value)" class="status-select ${o.status}">
+                                <option value="pending" ${o.status === 'pending' ? 'selected' : ''}>معلق</option>
+                                <option value="delivered" ${o.status === 'delivered' ? 'selected' : ''}>تم التوصيل</option>
+                                <option value="cancelled" ${o.status === 'cancelled' ? 'selected' : ''}>ملغي</option>
+                            </select>
+                            <button onclick="printOrderTicket('${o.id}')" class="btn-icon" style="color: #64748b;" title="طباعة التيكيت"><i class="fas fa-print"></i></button>
+                        </div>
                     </td>
                 </tr>
             `).join('');
+        }
+
+        async function printOrderTicket(orderId) {
+            const { data: order, error } = await window.supabaseClient.from('orders').select('*').eq('id', orderId).single();
+            if (error || !order) {
+                showAdminToast('❌ فشل تحميل بيانات الطلب للطباعة', 'error');
+                return;
+            }
+
+            const printWindow = window.open('', '_blank', 'width=500,height=700');
+            
+            const { data: settings } = await window.supabaseClient.from('site_settings').select('*').eq('id', 1).single();
+            const storeName = settings?.store_name || 'Miftah Saada';
+            const storePhone = settings?.phone_number || '0635939690';
+            const storeLocation = settings?.location || 'اكادير، المغرب';
+
+            const ticketHtml = `
+                <html dir="rtl">
+                <head>
+                    <title>Order Label - ${order.id.slice(0,8)}</title>
+                    <style>
+                        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap');
+                        * { margin: 0; padding: 0; box-sizing: border-box; }
+                        body { font-family: 'Tajawal', sans-serif; padding: 20px; color: #000; background: #fff; }
+                        .ticket-container { 
+                            width: 100%; 
+                            max-width: 420px; 
+                            border: 1px solid #000; 
+                            padding: 25px; 
+                            margin: 0 auto;
+                            background: #fff;
+                        }
+                        
+                        .header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 5px; }
+                        .store-info { text-align: right; flex: 1; }
+                        .store-info h2 { font-size: 1.6rem; font-weight: 900; margin-bottom: 5px; }
+                        .store-info p { font-size: 0.85rem; font-weight: 700; color: #333; }
+                        
+                        .order-id-box { text-align: left; }
+                        .order-id-box span { font-size: 0.85rem; color: #666; display: block; margin-bottom: 2px; }
+                        .order-id-box h2 { font-size: 1.2rem; font-weight: 900; }
+
+                        .divider-solid { border-top: 1px solid #000; margin: 15px 0; }
+                        .divider-dashed { border-top: 2px dashed #000; margin: 20px 0; }
+
+                        .customer-section { text-align: right; margin: 15px 0; }
+                        .customer-section .to-label { font-size: 1rem; font-weight: 800; margin-bottom: 10px; display: block; }
+                        .customer-section .customer-name { font-size: 1.3rem; font-weight: 900; text-transform: uppercase; margin-bottom: 10px; }
+                        .customer-section .customer-address { font-size: 0.95rem; line-height: 1.5; font-weight: 700; color: #333; }
+                        .customer-section .customer-phone { font-size: 1.1rem; font-weight: 900; margin-top: 10px; }
+
+                        .cod-box { 
+                            background: #000; 
+                            color: #fff; 
+                            padding: 25px 20px; 
+                            border-radius: 15px; 
+                            text-align: center;
+                            margin: 15px 0;
+                        }
+                        .cod-box .cod-label { font-size: 1.1rem; font-weight: 800; display: block; margin-bottom: 12px; }
+                        .cod-box .total-amount { font-size: 2.4rem; font-weight: 900; letter-spacing: 1px; }
+
+                        .thanks-msg { text-align: center; font-size: 1rem; font-weight: 800; margin-top: 15px; }
+
+                        .barcode-container {
+                            margin-top: 20px;
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                        }
+                        .barcode-img {
+                            width: 150px;
+                            height: 60px;
+                            background-image: repeating-linear-gradient(90deg, #000, #000 2px, transparent 2px, transparent 4px);
+                        }
+
+                        @media print {
+                            body { padding: 0; }
+                            .ticket-container { border: 1px solid #000; }
+                        }
+                    </style>
+                </head>
+                <body onload="window.print();">
+                    <div class="ticket-container">
+                        <div class="header">
+                            <div class="store-info">
+                                <h2>${storeName}</h2>
+                                <p>${storeLocation} | ${storePhone}</p>
+                            </div>
+                            <div class="order-id-box">
+                                <span>Order ID</span>
+                                <h2>#${order.id.slice(0, 8).toUpperCase()}</h2>
+                            </div>
+                        </div>
+
+                        <div class="divider-solid"></div>
+
+                        <div class="customer-section">
+                            <span class="to-label">إلى (TO):</span>
+                            <div class="customer-name">${order.customer_name}</div>
+                            <div class="customer-address">${order.address}</div>
+                            <div class="customer-phone" dir="ltr">${order.phone}</div>
+                        </div>
+
+                        <div class="divider-dashed"></div>
+
+                        <div class="cod-box">
+                            <span class="cod-label">المبلغ عند الاستلام (COD)</span>
+                            <span class="total-amount">DH ${parseFloat(order.total_price).toFixed(2)}</span>
+                        </div>
+
+                        <div class="thanks-msg">شكراً لثقتكم بمتجرنا</div>
+
+                        <div class="barcode-container">
+                            <div class="barcode-img"></div>
+                        </div>
+                    </div>
+                </body>
+                </html>
+            `;
+
+            printWindow.document.write(ticketHtml);
+            printWindow.document.close();
         }
 
         async function updateOrderStatus(id, status) {
@@ -1804,7 +2052,7 @@
                 // Ignore the placeholder row if it exists
                 return !row.textContent.includes('لا يوجد عملاء حالياً');
             });
-            
+
             if (!rows.length) { showAdminToast('لا يوجد بيانات لتصديرها', 'error'); return; }
 
             // Create a styled HTML table that Excel can open with colors
@@ -1967,7 +2215,7 @@
                     console.error('Supabase client not available in admin!');
                 }
             }, 700);
-            
+
             // Handle Product Form Submit (handles both add & edit)
             const productForm = document.getElementById('productForm');
             if (productForm) {
@@ -1980,7 +2228,7 @@
                     try {
                         // 1. Upload images first
                         const mediaUrls = await uploadImagesToSupabase();
-                        
+
                         saveBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري حفظ البيانات...';
 
                         // 2. Prepare product data
@@ -1995,6 +2243,7 @@
                         const productData = {
                             name: document.getElementById('p-name').value,
                             price: parseFloat(document.getElementById('p-price').value),
+                            old_price: document.getElementById('p-old-price').value ? parseFloat(document.getElementById('p-old-price').value) : null,
                             category: document.getElementById('p-category').value,
                             brand: document.getElementById('p-brand').value,
                             description: document.getElementById('p-desc').value,
@@ -2045,16 +2294,17 @@
         async function editProduct(id) {
             try {
                 openProductModal(); // Reset form and ID first
-                
+
                 const { data: p, error } = await window.supabaseClient.from('products').select('*').eq('id', id).single();
                 if (error) throw error;
 
                 currentEditId = id; // Set the correct ID for editing
                 document.getElementById('modal-title').textContent = 'تعديل المنتج';
-                
+
                 // Fill form
                 document.getElementById('p-name').value = p.name;
                 document.getElementById('p-price').value = p.price;
+                document.getElementById('p-old-price').value = p.old_price || '';
                 document.getElementById('p-category').value = p.category || 'smartphone';
                 document.getElementById('p-brand').value = p.brand || 'Other';
                 document.getElementById('p-desc').value = p.description || '';
@@ -2095,9 +2345,9 @@
             const status = document.getElementById('logo-upload-status');
             const preview = document.getElementById('logo-preview');
             const successMsg = document.getElementById('auto-color-success');
-            
+
             status.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري تحليل الألوان...';
-            
+
             try {
                 // 1. Upload to Supabase Storage
                 const fileExt = file.name.split('.').pop();
@@ -2105,7 +2355,7 @@
                 const filePath = `logos/${fileName}`;
 
                 const { error: uploadError } = await window.supabaseClient.storage
-                    .from('products') 
+                    .from('products')
                     .upload(filePath, file);
 
                 if (uploadError) throw uploadError;
@@ -2118,14 +2368,14 @@
                 const img = new Image();
                 img.crossOrigin = "Anonymous";
                 img.src = publicUrl;
-                
-                img.onload = function() {
+
+                img.onload = function () {
                     const canvas = document.createElement('canvas');
                     const ctx = canvas.getContext('2d');
                     canvas.width = img.width;
                     canvas.height = img.height;
                     ctx.drawImage(img, 0, 0);
-                    
+
                     const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
                     const colorCounts = {};
                     let maxCount = 0;
@@ -2135,18 +2385,18 @@
                     // Sample pixels (every 40th for speed)
                     for (let i = 0; i < imageData.length; i += 40) {
                         const r = imageData[i];
-                        const g = imageData[i+1];
-                        const b = imageData[i+2];
-                        const a = imageData[i+3];
-                        
+                        const g = imageData[i + 1];
+                        const b = imageData[i + 2];
+                        const a = imageData[i + 3];
+
                         if (a < 128) continue; // Skip transparent
-                        
+
                         // Ignore extreme whites and blacks
                         if ((r > 240 && g > 240 && b > 240) || (r < 20 && g < 20 && b < 20)) continue;
 
                         const hex = `#${((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1)}`;
                         colorCounts[hex] = (colorCounts[hex] || 0) + 1;
-                        
+
                         if (colorCounts[hex] > maxCount) {
                             maxCount = colorCounts[hex];
                             dominantColor = hex;
@@ -2163,18 +2413,18 @@
                     document.getElementById('setting-primary-hex').value = dominantColor.toUpperCase();
                     document.getElementById('setting-primary-color').value = dominantColor;
                     document.getElementById('primary-color-preview').style.background = dominantColor;
-                    
+
                     document.getElementById('setting-secondary-hex').value = secondaryColor.toUpperCase();
                     document.getElementById('setting-secondary-color').value = secondaryColor;
                     document.getElementById('secondary-color-preview').style.background = secondaryColor;
 
                     preview.innerHTML = `<div class="preview-item"><img src="${publicUrl}" style="max-height: 80px; object-fit: contain;"></div>`;
-                    window.logoUrl = publicUrl; 
-                    
+                    window.logoUrl = publicUrl;
+
                     status.innerHTML = '✅ تم استخراج الألوان بنجاح!';
                     successMsg.style.display = 'flex';
                     setTimeout(() => { successMsg.style.display = 'none'; }, 6000);
-                    
+
                     updateLiveTheme();
                 };
 
@@ -2211,18 +2461,18 @@
                     document.getElementById('setting-location').value = data.location || '';
                     document.getElementById('setting-store-name').value = data.store_name || '';
                     document.getElementById('setting-store-desc').value = data.store_description || '';
-                    
+
                     if (data.store_name) {
                         const trimmedName = (data.store_name || '').trim();
                         const parts = trimmedName.split(' ');
-                        const formatted = parts.length > 1 
+                        const formatted = parts.length > 1
                             ? `${parts[0]} <span style="color: var(--primary-color);">${parts.slice(1).join(' ')}</span>`
                             : trimmedName;
                         if (document.getElementById('admin-logo-name')) {
                             document.getElementById('admin-logo-name').innerHTML = formatted;
                         }
                     }
-                    
+
                     // New fields
                     document.getElementById('setting-facebook').value = data.facebook_url || '';
                     document.getElementById('setting-instagram').value = data.instagram_url || '';
@@ -2254,7 +2504,7 @@
                         const preview = document.getElementById('logo-preview');
                         preview.innerHTML = `<div class="preview-item"><img src="${data.logo_url}" style="max-height: 80px; object-fit: contain;"></div>`;
                         window.logoUrl = data.logo_url;
-                        
+
                         // Update sidebar logo
                         const sidebarLogo = document.getElementById('admin-logo-name');
                         if (sidebarLogo) {
@@ -2366,9 +2616,9 @@
                 // Try to upload to 'products' bucket
                 const { error: uploadError } = await window.supabaseClient.storage
                     .from('products')
-                    .upload(filePath, file, { 
+                    .upload(filePath, file, {
                         cacheControl: '3600',
-                        upsert: true 
+                        upsert: true
                     });
 
                 if (uploadError) throw uploadError;
@@ -2395,7 +2645,7 @@
         }
 
         // --- Initialization ---
-        window.onerror = function(msg, url, line) {
+        window.onerror = function (msg, url, line) {
             showAdminToast(`⚠️ خطأ برمج: ${msg} (السطر ${line})`, 'error');
             return false;
         };

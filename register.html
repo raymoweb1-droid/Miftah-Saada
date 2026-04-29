@@ -12,6 +12,10 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="js/supabase.js"></script>
 
+    <script>
+        const theme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+    </script>
 </head>
 <body>
 
@@ -102,7 +106,6 @@
                 if (error) throw error;
                 
                 // --- CUSTOMER DATA CAPTURE ---
-                // Corrected column names to match Supabase schema (name, phone, email)
                 await window.supabaseClient.from('customers').insert([{
                     name: name,
                     phone: phone,

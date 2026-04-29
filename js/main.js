@@ -2,29 +2,104 @@ document.addEventListener('DOMContentLoaded', () => {
     const WHATSAPP_NUMBER = '212635939690';
     const ADMIN_EMAIL = 'raymoweb1@gmail.com';
 
-    // --- Preloader Control ---
+    // --- Preloader Control & Page Transitions ---
     window.hidePreloader = function() {
         const preloader = document.getElementById('preloader');
         if (preloader) {
             preloader.classList.add('fade-out');
-            setTimeout(() => {
-                if (preloader && preloader.parentNode) preloader.parentNode.removeChild(preloader);
-            }, 800);
+            // We do NOT remove it from DOM so we can reuse it for transitions
         }
     }
+
+    window.showPreloader = function() {
+        let preloader = document.getElementById('preloader');
+        if (!preloader) {
+            // Re-create if missing
+            preloader = document.createElement('div');
+            preloader.id = 'preloader';
+            preloader.innerHTML = `
+                <div class="loader-content">
+                    <div class="loader-logo">Miftah Saada</div>
+                    <div class="loader-bar"><div class="bar-progress"></div></div>
+                </div>
+            `;
+            document.body.appendChild(preloader);
+        }
+        preloader.classList.remove('fade-out');
+    };
 
     // Fallback: hide preloader after 5 seconds anyway
     setTimeout(window.hidePreloader, 5000);
 
     window.addEventListener('load', () => {
-        // Only hide if we aren't waiting for specific data in pages that use renderGlobalProducts
         if (!document.querySelector('.products-grid') && !document.querySelector('.offers-grid')) {
             window.hidePreloader();
         }
     });
 
+    // Intercept internal links for smooth transitions
+    document.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', function(e) {
+            const target = this.getAttribute('href');
+            // Check if it's an internal link
+            if (target && !target.startsWith('#') && !target.startsWith('javascript') && !target.startsWith('http') && !target.startsWith('mailto') && !target.startsWith('tel') && this.getAttribute('target') !== '_blank') {
+                e.preventDefault();
+                window.showPreloader();
+                setTimeout(() => {
+                    window.location.href = target;
+                }, 400); // Wait for fade-in animation
+            }
+        });
+    });
+
+
     // Load Dynamic Settings Immediately
     loadSiteSettings();
+
+    // --- Dark Mode Logic ---
+    function initTheme() {
+        const savedTheme = localStorage.getItem('theme');
+        const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        const theme = savedTheme || systemTheme;
+        
+        document.documentElement.setAttribute('data-theme', theme);
+        updateThemeIcon(theme);
+    }
+
+    function toggleTheme() {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        updateThemeIcon(newTheme);
+        
+        if (window.showToast) {
+            const msg = newTheme === 'dark' ? 'تم تفعيل الوضع الليلي' : 'تم تفعيل الوضع النهاري';
+            window.showToast(msg, 'success');
+        }
+    }
+
+    function updateThemeIcon(theme) {
+        const icons = document.querySelectorAll('#theme-toggle i');
+        icons.forEach(icon => {
+            if (theme === 'dark') {
+                icon.className = 'fas fa-sun';
+            } else {
+                icon.className = 'fas fa-moon';
+            }
+        });
+    }
+
+    // Initialize theme
+    initTheme();
+
+    // Event delegation for theme toggle
+    document.addEventListener('click', (e) => {
+        if (e.target.closest('#theme-toggle')) {
+            toggleTheme();
+        }
+    });
 
     // --- نظام التنبيهات (Toast System) ---
     const toastContainer = document.createElement('div');

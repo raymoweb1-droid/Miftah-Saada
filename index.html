@@ -12,6 +12,10 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="js/supabase.js"></script>
 
+    <script>
+        const theme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+    </script>
 </head>
 <body>
 
@@ -39,6 +43,9 @@
                 </ul>
             </nav>
             <div class="nav-icons">
+                <button id="theme-toggle" class="icon-btn" aria-label="Toggle Dark Mode">
+                    <i class="fas fa-moon"></i>
+                </button>
                 <a href="login.html" class="icon-btn">
                     <i class="fas fa-user-circle"></i>
                 </a>
@@ -109,13 +116,10 @@
     <section class="brands">
         <div class="container">
             <h2 class="section-title">تصفح حسب الماركة</h2>
-            <div class="brands-grid">
-                <a href="shop.html?brand=Apple" class="brand-card">Apple</a>
-                <a href="shop.html?brand=Samsung" class="brand-card">Samsung</a>
-                <a href="shop.html?brand=Xiaomi" class="brand-card">Xiaomi</a>
-                <a href="shop.html?brand=Oppo" class="brand-card">Oppo</a>
-                <a href="shop.html?brand=Huawei" class="brand-card">Huawei</a>
-                <a href="shop.html?brand=OnePlus" class="brand-card">OnePlus</a>
+            <div class="brands-marquee-wrapper">
+                <div class="brands-marquee" id="brands-container">
+                    <!-- Dynamic brands will appear here -->
+                </div>
             </div>
         </div>
     </section>
@@ -189,6 +193,21 @@
                     window.history.replaceState({}, document.title, window.location.pathname);
                 }, 500);
             }
+            // Render Dynamic Brands
+            async function renderBrands() {
+                const container = document.getElementById('brands-container');
+                if (!container) return;
+
+                const { data: brands, error } = await window.supabaseClient.from('brands').select('*').order('name');
+                if (!error && brands && brands.length > 0) {
+                    const html = brands.map(b => `
+                        <a href="shop.html?brand=${b.name}" class="brand-card">${b.name}</a>
+                    `).join('');
+                    // Duplicate twice for smooth infinite scrolling
+                    container.innerHTML = html + html; 
+                }
+            }
+            renderBrands();
         });
     </script>
 </body>

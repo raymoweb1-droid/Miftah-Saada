@@ -903,11 +903,19 @@
 
             <!-- Categories Section -->
             <section id="categories" class="tab-content">
-                <div class="card" style="display: flex; justify-content: space-between; align-items: center;">
-                    <h3>إدارة الفئة</h3>
+                <div class="card" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+                    <div style="display: flex; align-items: center; gap: 15px; flex-wrap: wrap;">
+                        <h3>إدارة الفئات</h3>
+                        <button class="btn" id="btn-add-popular-cats" onclick="addPopularCategories()" style="background: #f59e0b; color: white; font-size: 0.85rem; padding: 8px 15px;">
+                            <i class="fas fa-magic"></i> إضافة الفئات الشهيرة تلقائياً
+                        </button>
+                        <button class="btn" id="btn-seed-products" onclick="addSampleProductPerCategory()" style="background: #10b981; color: white; font-size: 0.85rem; padding: 8px 15px;">
+                            <i class="fas fa-seedling"></i> إضافة منتج تجريبي لكل فئة
+                        </button>
+                    </div>
                     <div style="display: flex; gap: 10px;">
                         <input type="text" id="new-category-name" placeholder="اسم الفئة الجديدة"
-                            style="padding: 10px; border: 1px solid #e2e8f0; border-radius: 8px;">
+                            style="padding: 10px; border: 1px solid #e2e8f0; border-radius: 8px; min-width: 200px;">
                         <button class="btn btn-primary" onclick="addCategory()">+ إضافة فئة</button>
                     </div>
                 </div>
@@ -1765,7 +1773,6 @@
         }
 
         async function deleteCategory(id, name) {
-
             try {
                 const { error } = await window.supabaseClient.from('categories').delete().eq('id', id);
                 if (error) throw error;
@@ -1774,6 +1781,135 @@
                 loadCategoriesList();
             } catch (err) {
                 showAdminToast(`❌ فشل الحذف: ${err.message}`, 'error');
+            }
+        }
+
+        async function addPopularCategories() {
+            const popularCategories = [
+                { name: 'هواتف ذكية',      slug: 'smartphones' },
+                { name: 'سماعات',           slug: 'headphones' },
+                { name: 'ساعات ذكية',       slug: 'smartwatches' },
+                { name: 'لابتوب وحاسوب',    slug: 'laptops' },
+                { name: 'أكسسوارات',        slug: 'accessories' },
+                { name: 'شواحن وبطاريات',   slug: 'chargers' },
+                { name: 'حافظات وكفرات',    slug: 'cases' },
+                { name: 'سماعات بلوتوث',    slug: 'bluetooth-speakers' },
+                { name: 'كاميرات',          slug: 'cameras' },
+                { name: 'العاب وترفيه',     slug: 'gaming' }
+            ];
+
+            const btn = document.getElementById('btn-add-popular-cats');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الإضافة...';
+            btn.disabled = true;
+
+            try {
+                // جلب الفئات الموجودة مع الاسم والـ slug معاً
+                const { data: existingCats } = await window.supabaseClient
+                    .from('categories')
+                    .select('name, slug');
+
+                const existingSlugs = (existingCats || []).map(c => c.slug.toLowerCase());
+                const existingNames = (existingCats || []).map(c => c.name.trim().toLowerCase());
+
+                // استبعاد أي فئة موجودة سواء بالاسم أو بالـ slug
+                const newCats = popularCategories.filter(c =>
+                    !existingSlugs.includes(c.slug.toLowerCase()) &&
+                    !existingNames.includes(c.name.trim().toLowerCase())
+                );
+
+                if (newCats.length > 0) {
+                    const { error } = await window.supabaseClient.from('categories').insert(newCats);
+                    if (error) throw error;
+                    showAdminToast(`✅ تم إضافة ${newCats.length} فئة بنجاح!`, 'success');
+                } else {
+                    showAdminToast('✅ جميع الفئات الشهيرة موجودة مسبقاً!', 'success');
+                }
+
+                loadCategoriesList();
+            } catch (error) {
+                console.error('Error adding popular categories:', error);
+                showAdminToast(`❌ فشل الإضافة: ${error.message || 'خطأ غير معروف'}`, 'error');
+            } finally {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }
+        }
+        async function addSampleProductPerCategory() {
+            const btn = document.getElementById('btn-seed-products');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الإضافة...';
+            btn.disabled = true;
+
+            // بيانات المنتجات التجريبية لكل فئة
+            const sampleProducts = {
+                'smartphones':        { name: 'هاتف ذكي تجريبي',       price: 1999, old_price: 2499, brand: 'Samsung',  description: 'هاتف ذكي بمواصفات عالية وشاشة رائعة' },
+                'headphones':         { name: 'سماعة أذن تجريبية',      price: 299,  old_price: 399,  brand: 'JBL',      description: 'سماعة بجودة عالية وصوت نقي' },
+                'smartwatches':       { name: 'ساعة ذكية تجريبية',       price: 599,  old_price: 799,  brand: 'Xiaomi',   description: 'ساعة ذكية انيقة بميزات صحية متقدمة' },
+                'laptops':            { name: 'حاسوب محمول تجريبي',       price: 4999, old_price: 5999, brand: 'Lenovo',   description: 'حاسوب محمول للعمل والدراسة بأداء ممتاز' },
+                'accessories':        { name: 'أكسسوار تجريبي',         price: 99,   old_price: 149,  brand: 'Baseus',   description: 'أكسسوار عصري وعملي لهاتفك' },
+                'chargers':           { name: 'شاحن سريع تجريبي',        price: 149,  old_price: 199,  brand: 'Anker',    description: 'شاحن سريع 65W متوافق مع جميع الأجهزة' },
+                'cases':              { name: 'كفر حماية تجريبي',        price: 59,   old_price: 89,   brand: 'Other',    description: 'كفر متين يحمي هاتفك من السقوط والخدوش' },
+                'bluetooth-speakers': { name: 'سماعة بلوتوث تجريبية',   price: 399,  old_price: 549,  brand: 'JBL',      description: 'سماعة بلوتوث محمولة بصوت قوي وواضح' },
+                'cameras':            { name: 'كاميرا تجريبية',           price: 2499, old_price: 2999, brand: 'Other',    description: 'كاميرا رقمية بدقة تصوير عالية' },
+                'gaming':             { name: 'جهاز تجريبي للألعاب',      price: 899,  old_price: 1199, brand: 'Other',    description: 'جهاز ترفيه وألعاب بتجربة لا تنسى' }
+            };
+
+            try {
+                // 1. جلب كل الفئات من Supabase
+                const { data: categories, error: catErr } = await window.supabaseClient
+                    .from('categories').select('id, name, slug').order('name');
+                if (catErr) throw catErr;
+
+                // 2. جلب أسماء المنتجات الموجودة لتجنب التكرار
+                const { data: existingProds } = await window.supabaseClient
+                    .from('products').select('name');
+                const existingNames = (existingProds || []).map(p => p.name.trim().toLowerCase());
+
+                // 3. بناء قائمة المنتجات — منتج لكل فئة بغض النظر عن الـ slug
+                const toInsert = [];
+                for (const cat of categories) {
+                    // إذا كان الـ slug معروفاً استخدم قالبه، وإلا استخدم قالباً عاماً
+                    const template = sampleProducts[cat.slug] || {
+                        name:        `منتج تجريبي - ${cat.name}`,
+                        price:       299,
+                        old_price:   399,
+                        brand:       'Other',
+                        description: `منتج تجريبي في فئة ${cat.name}`
+                    };
+
+                    // تجاوز إذا الاسم موجود مسبقاً
+                    if (existingNames.includes(template.name.trim().toLowerCase())) continue;
+
+                    toInsert.push({
+                        name:        template.name,
+                        price:       template.price,
+                        old_price:   template.old_price,
+                        category:    cat.slug,
+                        brand:       template.brand,
+                        description: template.description,
+                        stock:       10,
+                        created_at:  new Date().toISOString()
+                    });
+                }
+
+                if (toInsert.length === 0) {
+                    showAdminToast('✅ جميع الفئات لديها منتجات مسبقاً!', 'success');
+                    return;
+                }
+
+                const { error: insertErr } = await window.supabaseClient.from('products').insert(toInsert);
+                if (insertErr) throw insertErr;
+
+                showAdminToast(`✅ تم إضافة ${toInsert.length} منتج تجريبي بنجاح!`, 'success');
+                loadCategoriesList(); // تحديث عداد المنتجات
+
+            } catch (err) {
+                console.error('Seed Error:', err);
+                showAdminToast(`❌ فشل: ${err.message}`, 'error');
+            } finally {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
             }
         }
 
